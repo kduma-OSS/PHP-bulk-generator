@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^7.4",
-        "tightenco/collect": "^7.19",
-        "ext-json": "*"
+        "ext-json": "*",
+        "mpdf/mpdf": "^8.0",
+        "tightenco/collect": "^7.19"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0"
