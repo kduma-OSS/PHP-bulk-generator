@@ -9,7 +9,7 @@ class CsvDataSourceTest extends TestCase
 {
     public function testReadingBasicCsvFile()
     {
-        $sut = new CsvDataSource(__DIR__ . '/basic_csv.csv');
+        $sut = new CsvDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
         $data = $sut->getData();
         
