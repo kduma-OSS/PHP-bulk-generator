@@ -1,0 +1,42 @@
+{
+    "name": "kduma/bulk-generator",
+    "description": "Bulk Document Generator",
+    "keywords": [
+        "kduma",
+        "bulk-generator"
+    ],
+    "homepage": "https://github.com/kduma/bulk-generator",
+    "license": "GPL-2.0-or-later",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Krystian Duma",
+            "email": "git@krystian.duma.sh",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kduma\\BulkGenerator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kduma\\BulkGenerator\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
