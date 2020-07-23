@@ -17,8 +17,26 @@ composer require kduma/bulk-generator
 
 ## Usage
 
-``` php
-// Usage description here
+```php
+use Kduma\BulkGenerator\ContentGenerators\SimpleTemplateWithPlaceholdersContentGenerator;
+use Kduma\BulkGenerator\DataSources\CsvWithHeadersDataSource;
+use Kduma\BulkGenerator\PdfGenerators\MpdfGenerator;
+use Kduma\BulkGenerator\PageOptions\PageMargins;
+use Kduma\BulkGenerator\PageOptions\PageSize;
+use Kduma\BulkGenerator\BulkGenerator;
+
+$dataSource = new CsvWithHeadersDataSource('data.csv');
+
+$pdfGenerator = new MpdfGenerator(
+    PageSize::fromName('A6', true),
+    PageMargins::makeByAxis(5, 5)
+);
+
+$generator = (new BulkGenerator($dataSource, $pdfGenerator))
+    ->setFrontTemplate('front_template.pdf')
+    ->setFrontContentGenerator(new SimpleTemplateWithPlaceholdersContentGenerator('Hello {name}!'));
+
+$generator->generate('output.pdf');
 ```
 
 ### Testing
