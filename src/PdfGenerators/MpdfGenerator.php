@@ -11,14 +11,10 @@ class MpdfGenerator implements PdfGeneratorInterface
 {
     private \Mpdf\Mpdf $mpdf;
     private array $templates = [];
-    /**
-     * @var PageSize
-     */
     private PageSize $pageSize;
-    /**
-     * @var PageMargins
-     */
     private PageMargins $pageMargins;
+    private string $css;
+    private bool $css_written = false;
 
     /**
      * MpdfGenerator constructor.
@@ -51,11 +47,17 @@ class MpdfGenerator implements PdfGeneratorInterface
         ]);
         
         $this->templates = [];
+        $this->css_written = false;
     }
 
     public function insert(string $html, string $template = null)
     {
         $this->mpdf->AddPage();
+
+        if(!$this->css_written) {
+            $this->mpdf->WriteHTML("<style>{$this->css}</style>");
+            $this->css_written = true;
+        }
         
         if($template) {
             if(!isset($this->templates[$template])) {
@@ -72,5 +74,11 @@ class MpdfGenerator implements PdfGeneratorInterface
     public function finish(): string
     {
         return $this->mpdf->Output('', 'S');
+    }
+
+    public function setCss(string $css): MpdfGenerator
+    {
+        $this->css = $css;
+        return $this;
     }
 }
