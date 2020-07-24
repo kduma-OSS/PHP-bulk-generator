@@ -25,7 +25,7 @@ class MpdfGenerator implements PdfGeneratorInterface
     public function __construct(PageSize $pageSize = null, PageMargins $pageMargins = null)
     {
         $this->pageSize = $pageSize ?? PageSize::fromName('A4');
-        $this->pageMargins = $pageMargins ?? new PageMargins();
+        $this->pageMargins = $pageMargins ?? new PageMargins(0, 0, 0, 0, 0, 0);
     }
 
     public function start(bool $doubleSided)

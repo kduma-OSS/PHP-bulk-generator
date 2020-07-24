@@ -129,29 +129,51 @@ $pdfGenerator->setCss(/** @lang CSS */ <<<CSS
     }
     
     .id {
-        font-size:4mm; 
+        font-size:2.5mm; 
+        color: gray;
+    }
+    
+    .center {
+        vertical-align: middle;
+        text-align: center;
     }
     CSS
 );
 
 $content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
-    {% box 5, 5 with {"class": ["key"]} %}
+    {% box 5, 5, 90 with {"class": ["key"]} %}
     <strong>Name:</strong>
     {{ name }}
     {% endBox %}
     
-    {% box 5, 25 with {"class": "key"} %}
+    {% box 5, 25, 90 with {"class": "key"} %}
     <strong>City:</strong>
     {{ city }}
     {% endBox %}
     
-    {% box 5, 45 with {"class": "id"} %}
+    {% box 5, 47.5, 90 with {"class": "id"} %}
     {{ uuid }}
     {% endBox %}
     Twig
 );
+
 $generator = (new BulkGenerator($dataSource, $pdfGenerator))
-//    ->setFrontTemplate(__DIR__.'/template.pdf')
     ->setFrontContentGenerator($content);
 
 $generator->generate(__DIR__.'/output.pdf');
+
+$back_content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
+    {% box 0, 0, 100, 55 with {"class": "id center"} as table %}
+        <strong>Back of</strong>
+        <br>
+        <br>
+        {{ uuid }}
+    {% endBox %}
+    Twig
+);
+
+$generator = (new BulkGenerator($dataSource, $pdfGenerator))
+    ->setFrontContentGenerator($content)
+    ->setBackContentGenerator($back_content);
+
+$generator->generate(__DIR__.'/output_duplex.pdf');
