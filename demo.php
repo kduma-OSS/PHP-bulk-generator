@@ -118,7 +118,7 @@ $dataSource = new PassthroughDataSource(
         ->map(fn($row) => array_combine(['uuid', 'name', 'city'], $row))
 );
 
-$pdfGenerator = new MpdfGenerator(new PageSize(100, 55));
+$pdfGenerator = new MpdfGenerator(new PageSize(90, 50));
 $pdfGenerator->setCss(/** @lang CSS */ <<<CSS
     .key, .id {
         font-family: monospace; 
@@ -141,17 +141,17 @@ $pdfGenerator->setCss(/** @lang CSS */ <<<CSS
 );
 
 $content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
-    {% box 5, 5, 90 with {"class": ["key"]} %}
+    {% box 5, 5, 80 with {"class": ["key"]} %}
     <strong>Name:</strong>
     {{ name }}
     {% endBox %}
     
-    {% box 5, 25, 90 with {"class": "key"} %}
+    {% box 5, 25, 80 with {"class": "key"} %}
     <strong>City:</strong>
     {{ city }}
     {% endBox %}
     
-    {% box 5, 47.5, 90 with {"class": "id"} %}
+    {% box 5, 42.5, 80 with {"class": "id"} %}
     {{ uuid }}
     {% endBox %}
     Twig
@@ -163,7 +163,7 @@ $generator = (new BulkGenerator($dataSource, $pdfGenerator))
 $generator->generate(__DIR__.'/output.pdf');
 
 $back_content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
-    {% box 0, 0, 100, 55 with {"class": "id center"} as table %}
+    {% box 0, 0, 90, 50 with {"class": "id center"} as table %}
         <strong>Back of</strong>
         <br>
         <br>
@@ -176,4 +176,4 @@ $generator = (new BulkGenerator($dataSource, $pdfGenerator))
     ->setFrontContentGenerator($content)
     ->setBackContentGenerator($back_content);
 
-$generator->generate(__DIR__.'/output_duplex.pdf');
+$generator->generate(__DIR__ . '/output_duplex.pdf');
