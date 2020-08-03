@@ -8,15 +8,15 @@ use Kduma\BulkGenerator\PdfGenerators\PdfGeneratorInterface;
 
 class BulkGenerator
 {
-    public ?ContentGeneratorInterface $front_content_generator = null;
-    public ?string $front_template = null;
+    protected ?ContentGeneratorInterface $front_content_generator = null;
+    protected ?string $front_template = null;
     
-    public ?ContentGeneratorInterface $back_content_generator = null;
-    public ?string $back_template = null;
+    protected ?ContentGeneratorInterface $back_content_generator = null;
+    protected ?string $back_template = null;
     
-    public DataSourceInterface $data_source;
+    protected DataSourceInterface $data_source;
     
-    public PdfGeneratorInterface $pdf_generator;
+    protected PdfGeneratorInterface $pdf_generator;
 
     /**
      * BulkGenerator constructor.
@@ -40,28 +40,38 @@ class BulkGenerator
         
         if(!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator)
             throw new \Exception("No templates provided to generate!");
-        
-        $this->pdf_generator->start(($this->front_content_generator || $this->front_template)) && ($this->back_template || $this->back_content_generator);
+
+        $has_front_side = $this->front_content_generator || $this->front_template;
+        $has_back_side = $this->back_template || $this->back_content_generator;
+        $this->pdf_generator->start($has_front_side && $has_back_side);
 
         foreach ($data as $row) {
-            if($this->front_content_generator || $this->front_template)
-                $this->pdf_generator->insert(
-                    $this->front_content_generator ? $this->front_content_generator->getContent($row) : '',
-                    $this->front_template
-                );
-            
-            if($this->back_template || $this->back_content_generator)
-                $this->pdf_generator->insert(
-                    $this->back_content_generator ? $this->back_content_generator->getContent($row) : '',
-                    $this->back_template
-                );
+            $this->renderOne($row, $has_front_side, $has_back_side);
         }
         
         file_put_contents($filename, $this->pdf_generator->finish());
     }
     
-    
-    
+    /**
+     * @param array $row
+     * @param bool  $has_front_side
+     * @param bool  $has_back_side
+     */
+    protected function renderOne(array $row, bool $has_front_side, bool $has_back_side): void
+    {
+        if ($has_front_side)
+            $this->pdf_generator->insert(
+                $this->front_content_generator ? $this->front_content_generator->getContent($row) : '',
+                $this->front_template
+            );
+
+        if ($has_back_side)
+            $this->pdf_generator->insert(
+                $this->back_content_generator ? $this->back_content_generator->getContent($row) : '',
+                $this->back_template
+            );
+    }
+
     /**
      * @return ContentGeneratorInterface|null
      */
@@ -156,7 +166,7 @@ class BulkGenerator
         $this->data_source = $data_source;
         return $this;
     }
-    
+
     /**
      * @return PdfGeneratorInterface
      */
