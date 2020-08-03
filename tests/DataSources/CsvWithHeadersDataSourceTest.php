@@ -37,7 +37,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
                     'city' => 'New York',
                 ],
             ],
-            $data->all()
+            $data
         );
     }
     public function testReadingMissingColumnsCsvFileWithHeaders()
@@ -59,7 +59,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
                     'city' => 'New York',
                 ],
             ],
-            $data->all()
+            $data
         );
     }
 }

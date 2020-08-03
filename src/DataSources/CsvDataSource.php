@@ -30,15 +30,17 @@ class CsvDataSource implements DataSourceInterface
         $this->escape = $escape;
     }
 
-    public function getData(): Enumerable
+    public function getData(): array
     {
-        return new LazyCollection(function () {
-            if (($handle = fopen($this->filename, "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 0, $this->delimiter, $this->enclosure, $this->escape)) !== FALSE) {
-                    yield collect($data)->mapWithKeys(fn($value, $index) => ['column_'.$index => $value])->toArray();
-                }
-                fclose($handle);
+        $data = [];
+        
+        if (($handle = fopen($this->filename, "r")) !== FALSE) {
+            while (($row = fgetcsv($handle, 0, $this->delimiter, $this->enclosure, $this->escape)) !== FALSE) {
+                $data[] = array_merge([], ...array_map(fn($value, $index) => ['column_'.$index => $value], array_values($row), array_keys($row)));
             }
-        });
+            fclose($handle);
+        }
+        
+        return $data;
     }
 }

@@ -8,5 +8,5 @@ use Tightenco\Collect\Support\Enumerable;
 
 interface DataSourceInterface
 {
-    public function getData() : Enumerable;
+    public function getData() : array;
 }

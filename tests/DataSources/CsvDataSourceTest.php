@@ -31,7 +31,7 @@ class CsvDataSourceTest extends TestCase
                     'column_2' => 'New York',
                 ],
             ], 
-            $data->all()
+            $data
         );
     }
 }

@@ -37,13 +37,14 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
 
     public function getContent(array $variables): string
     {
-        $variables = collect($variables)
-            ->flatMap(function ($value, $key) {
-                return is_array($value) ? [$key => json_encode($value)] + $this->dot([$key => $value]) : [$key => $value];
-            });
+        $variables = array_merge([], ...array_map(fn($value, $key) => is_array($value) ? [$key => json_encode($value)] + $this->dot([$key => $value]) : [$key => $value], array_values($variables), array_keys($variables)));
 
-        $variables['variables'] = print_r($variables->toArray(), true);
+        $variables['variables'] = print_r($variables, true);
 
-        return str_replace($variables->keys()->map(fn($key) => "{{$key}}")->toArray(), $variables->values()->toArray(), $this->template);
+        return str_replace(
+            array_map(fn($key) => "{{$key}}", array_keys($variables)),
+            array_values($variables), 
+            $this->template
+        );
     }
 }

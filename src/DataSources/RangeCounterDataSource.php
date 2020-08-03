@@ -27,20 +27,11 @@ class RangeCounterDataSource implements DataSourceInterface
         $this->increment = $increment;
     }
 
-    public function getData(): Enumerable
+    public function getData(): array
     {
-        if ($this->from > $this->to){
-            return new LazyCollection(function () {
-                for ($from = $this->from; $from >= $this->to; $from-=$this->increment) {
-                    yield ['counter' => $from];
-                }
-            });
-        } else {
-            return new LazyCollection(function () {
-                for ($from = $this->from; $from <= $this->to; $from+=$this->increment) {
-                    yield ['counter' => $from];
-                }
-            });
-        }
+        return array_map(
+            fn($counter) => ['counter' => $counter],
+            range($this->from, $this->to, $this->increment)
+        );
     }
 }

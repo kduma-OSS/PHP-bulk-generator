@@ -8,19 +8,19 @@ use Tightenco\Collect\Support\Enumerable;
 
 class PassthroughDataSource implements DataSourceInterface
 {
-    private Enumerable $data;
+    private array $data;
 
     /**
      * PassthroughDataSource constructor.
      *
-     * @param Enumerable $data
+     * @param array $data
      */
-    public function __construct(Enumerable $data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
     
-    public function getData(): Enumerable
+    public function getData(): array
     {
         return $this->data;
     }

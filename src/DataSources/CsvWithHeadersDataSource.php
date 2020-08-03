@@ -10,19 +10,18 @@ class CsvWithHeadersDataSource extends CsvDataSource
 {
     public function getHeaders(): array 
     {
-        return array_values(parent::getData()->first());
+        return array_values(parent::getData()[0]);
     }
     
-    public function getData(): Enumerable
+    public function getData(): array 
     {
         $ds = parent::getData();
         
-        $headers = collect($ds->first());
+        $headers = $ds[0];
+        unset($ds[0]);
         
-        return $ds->skip(1)
-            ->values()
-            ->map(function ($row) use ($headers) {
-                return $headers->mapWithKeys(fn($key, $index) => [$key => $row[$index] ?? null])->toArray();
-            });
+        return array_map(function ($row) use ($headers) {
+            return array_merge([], ...array_map(fn($key, $index) => [$key => $row[$index] ?? null], array_values($headers), array_keys($headers)));
+        }, array_values($ds));
     }
 }

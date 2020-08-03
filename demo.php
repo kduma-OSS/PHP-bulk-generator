@@ -8,7 +8,7 @@ use Kduma\BulkGenerator\BulkGenerator;
 
 require __DIR__.'/vendor/autoload.php';
 
-$value = <<<SAMPLE_DATA
+$data = <<<SAMPLE_DATA
 1|79C4BA2F-A922-F7A4-24BD-56974973AC5B|Kathleen Parks|High Level
 2|1D8769A6-AE6F-B2D7-A268-BB5C934E758D|Fuller Farmer|Kessel
 3|D3752C8A-D817-25CB-AD86-74941F839EBF|Karen Guthrie|Dietzenbach
@@ -111,12 +111,12 @@ $value = <<<SAMPLE_DATA
 100|462E1284-86D5-AF0F-74D1-CD0C58D1B93A|Emerson Nguyen|Namur
 SAMPLE_DATA;
 
+$data = explode("\n", $data);
+$data = array_map(fn($row) => explode("|", $row), $data);
+$data = array_map(fn($row) => array_combine(['number', 'uuid', 'name', 'city'], $row), $data);
 
-$dataSource = new PassthroughDataSource(
-    collect(explode("\n", $value))
-        ->map(fn($row) => explode("|", $row))
-        ->map(fn($row) => array_combine(['number', 'uuid', 'name', 'city'], $row))
-);
+
+$dataSource = new PassthroughDataSource($data);
 
 $pdfGenerator = new MpdfGenerator(new PageSize(90, 50));
 $pdfGenerator->setCss(/** @lang CSS */ <<<CSS

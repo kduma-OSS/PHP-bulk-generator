@@ -11,10 +11,10 @@ class PassthroughDataSourceTest extends TestCase
 
     public function testGetData()
     {
-        $collection = new Collection();
+        $data = [1, 2, 3];
         
-        $sut = new PassthroughDataSource($collection);
+        $sut = new PassthroughDataSource($data);
 
-        $this->assertSame($collection, $sut->getData());
+        $this->assertEquals($data, $sut->getData());
     }
 }

@@ -57,7 +57,7 @@ class BoxNode extends Node
     protected function compileDiv(Compiler $compiler): void
     {
         $compiler
-            ->write("\$attributes = collect(['style' => ['position' => 'absolute', 'left' => (")
+            ->write("\$attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['position' => 'absolute', 'left' => (")
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
@@ -82,7 +82,7 @@ class BoxNode extends Node
         
         if ($this->bordered) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['border' => '0.1mm solid black']])\n");
+                ->write("->add(['style' => ['border' => '0.1mm solid black']])\n");
         }
 
         if ($this->hasNode('attributes')) {
@@ -91,13 +91,14 @@ class BoxNode extends Node
             if ($node instanceof ArrayExpression) {
 
                 $compiler
-                    ->write("->mergeRecursive(")
+                    ->write("->add(")
                     ->subcompile($node)
                     ->raw(")\n");
             }
         }
-        
-        $this->writeAttributesMapperCode($compiler);
+
+        $compiler
+            ->write(";");
 
         $compiler
             ->addDebugInfo($this)
@@ -119,7 +120,7 @@ class BoxNode extends Node
     protected function compileTable(Compiler $compiler): void
     {
         $compiler
-            ->write("\$div_attributes = collect(['style' => ['position' => 'absolute', 'padding' => '0', 'left' => (")
+            ->write("\$div_attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['position' => 'absolute', 'padding' => '0', 'left' => (")
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
@@ -130,27 +131,28 @@ class BoxNode extends Node
 
         if ($this->bordered) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['border' => '0.1mm dotted red']])\n");
+                ->write("->add(['style' => ['border' => '0.1mm dotted red']])\n");
         }
         
         if ($this->hasNode('height')) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['height' => (")
+                ->write("->add(['style' => ['height' => (")
                 ->subcompile($this->getNode('height'))
                 ->raw(").'mm']])\n");
         }
         
         if ($this->hasNode('width')) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['width' => (")
+                ->write("->add(['style' => ['width' => (")
                 ->subcompile($this->getNode('width'))
                 ->raw(").'mm']])\n");
         }
 
-        $this->writeAttributesMapperCode($compiler);
+        $compiler
+            ->write(";");
         
         $compiler
-            ->write("\$attributes = collect(['style' => ['border-collapse' => 'collapse', 'overflow' => 'wrap']])\n")
+            ->write("\$attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['border-collapse' => 'collapse', 'overflow' => 'wrap']])\n")
             ->indent();
         
         if ($this->hasNode('table_attributes')) {
@@ -159,36 +161,37 @@ class BoxNode extends Node
             if ($node instanceof ArrayExpression) {
 
                 $compiler
-                    ->write("->mergeRecursive(")
+                    ->write("->add(")
                     ->subcompile($node)
                     ->raw(")\n");
             }
         }
 
-        $this->writeAttributesMapperCode($compiler);
+        $compiler
+            ->write(";");
 
         $compiler
-            ->write("\$table_attributes = collect([])\n")
+            ->write("\$table_attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start([])\n")
             ->indent();
 
 
         if ($this->hasNode('width')) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['width' => (")
+                ->write("->add(['style' => ['width' => (")
                 ->subcompile($this->getNode('width'))
                 ->raw(").'mm']])\n");
         }
         
         if ($this->hasNode('height')) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['height' => (")
+                ->write("->add(['style' => ['height' => (")
                 ->subcompile($this->getNode('height'))
                 ->raw(").'mm']])\n");
         }
         
         if ($this->bordered) {
             $compiler
-                ->write("->mergeRecursive(['style' => ['border' => '0.1mm solid black']])\n");
+                ->write("->add(['style' => ['border' => '0.1mm solid black']])\n");
         }
 
         if ($this->hasNode('attributes')) {
@@ -197,13 +200,14 @@ class BoxNode extends Node
             if ($node instanceof ArrayExpression) {
 
                 $compiler
-                    ->write("->mergeRecursive(")
+                    ->write("->add(")
                     ->subcompile($node)
                     ->raw(")\n");
             }
         }
 
-        $this->writeAttributesMapperCode($compiler);
+        $compiler
+            ->write(";");
 
         $compiler
             ->addDebugInfo($this)
@@ -232,40 +236,5 @@ class BoxNode extends Node
             ->write('echo ')
             ->string("</div>\n")
             ->raw(";\n");
-    }
-
-    /**
-     * @param Compiler $compiler
-     */
-    protected function writeAttributesMapperCode(Compiler $compiler): void
-    {
-        $compiler
-            ->write("->map(function (\$value, \$key) {\n")
-            ->indent()
-            ->write("if(!is_array(\$value))\n")
-            ->indent()
-            ->write("return \$value;\n\n")
-            ->outdent()
-            ->write("if(\$key != 'style')\n")
-            ->indent()
-            ->write("return collect(\$value)\n")
-            ->indent()
-            ->write("->implode(' ');\n\n")
-            ->outdent()
-            ->outdent()
-            ->write("return collect(\$value)\n")
-            ->indent()
-            ->write("->map(fn(\$value, \$key) => \$key.': '.\$value)\n")
-            ->write("->implode('; ');\n")
-            ->outdent()
-            ->outdent()
-            ->write("})\n")
-            ->write("->map(function (\$value, \$key) {\n")
-            ->indent()
-            ->write("return \$key.'=\"'.htmlentities(\$value).'\"';\n")
-            ->outdent()
-            ->write("})\n")
-            ->write("->implode(' ');\n\n")
-            ->outdent();
     }
 }

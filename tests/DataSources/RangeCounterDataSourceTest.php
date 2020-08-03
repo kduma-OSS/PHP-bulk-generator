@@ -26,7 +26,7 @@ class RangeCounterDataSourceTest extends TestCase
             [
                 'counter' => 4
             ]
-        ], $data->all());
+        ], $data);
     }
     
     public function testGetDataForFallingRange()
@@ -48,7 +48,7 @@ class RangeCounterDataSourceTest extends TestCase
             [
                 'counter' => 1
             ]
-        ], $data->all());
+        ], $data);
     }
     public function testGetDataForRisingRangeWithSpecifiedIncrements()
     {
@@ -63,7 +63,7 @@ class RangeCounterDataSourceTest extends TestCase
             [
                 'counter' => 3
             ]
-        ], $data->all());
+        ], $data);
     }
     
     public function testGetDataForFallingRangeWithSpecifiedIncrements()
@@ -79,6 +79,6 @@ class RangeCounterDataSourceTest extends TestCase
             [
                 'counter' => 2
             ]
-        ], $data->all());
+        ], $data);
     }
 }

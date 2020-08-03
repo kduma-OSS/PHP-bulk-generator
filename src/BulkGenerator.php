@@ -35,7 +35,7 @@ class BulkGenerator
     {
         $data = $this->data_source->getData();
         
-        if(!$data->count())
+        if(count($data) == 0)
             throw new \Exception("Data source is empty!");
         
         if(!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator)
@@ -43,7 +43,7 @@ class BulkGenerator
         
         $this->pdf_generator->start(($this->front_content_generator || $this->front_template)) && ($this->back_template || $this->back_content_generator);
 
-        $data->each(function ($row) {
+        foreach ($data as $row) {
             if($this->front_content_generator || $this->front_template)
                 $this->pdf_generator->insert(
                     $this->front_content_generator ? $this->front_content_generator->getContent($row) : '',
@@ -55,7 +55,7 @@ class BulkGenerator
                     $this->back_content_generator ? $this->back_content_generator->getContent($row) : '',
                     $this->back_template
                 );
-        });
+        }
         
         file_put_contents($filename, $this->pdf_generator->finish());
     }
@@ -139,38 +139,38 @@ class BulkGenerator
     }
 
     /**
-     * @return DataSourceInterface|null
+     * @return DataSourceInterface
      */
-    public function getDataSource(): ?DataSourceInterface
+    public function getDataSource(): DataSourceInterface
     {
         return $this->data_source;
     }
 
     /**
-     * @param DataSourceInterface|null $data_source
+     * @param DataSourceInterface $data_source
      *
      * @return BulkGenerator
      */
-    public function setDataSource(?DataSourceInterface $data_source): BulkGenerator
+    public function setDataSource(DataSourceInterface $data_source): BulkGenerator
     {
         $this->data_source = $data_source;
         return $this;
     }
     
     /**
-     * @return PdfGeneratorInterface|null
+     * @return PdfGeneratorInterface
      */
-    public function getPdfGenerator(): ?PdfGeneratorInterface
+    public function getPdfGenerator(): PdfGeneratorInterface
     {
         return $this->pdf_generator;
     }
 
     /**
-     * @param PdfGeneratorInterface|null $pdf_generator
+     * @param PdfGeneratorInterface $pdf_generator
      *
      * @return BulkGenerator
      */
-    public function setPdfGenerator(?PdfGeneratorInterface $pdf_generator): BulkGenerator
+    public function setPdfGenerator(PdfGeneratorInterface $pdf_generator): BulkGenerator
     {
         $this->pdf_generator = $pdf_generator;
         return $this;
