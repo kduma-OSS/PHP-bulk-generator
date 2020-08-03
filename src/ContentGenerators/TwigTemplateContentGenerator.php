@@ -6,6 +6,7 @@ namespace Kduma\BulkGenerator\ContentGenerators;
 
 use Kduma\BulkGenerator\ContentGenerators\Twig\BoxNode;
 use Kduma\BulkGenerator\ContentGenerators\Twig\BoxTokenParser;
+use Kduma\BulkGenerator\ContentGenerators\Twig\Loader\LoaderInterface;
 use Twig\Compiler;
 use Twig\Error\SyntaxError;
 use Twig\Node\Expression\AbstractExpression;
@@ -17,6 +18,11 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
 {
     private string $template;
     private array  $partials;
+    
+    /**
+     * @var LoaderInterface[]
+     */
+    private array $loaders = [];
 
     /**
      * TwigTemplateContentGenerator constructor.
@@ -51,7 +57,41 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
         ]);
         
         $twig->addTokenParser(new BoxTokenParser());
+
+        foreach ($this->loaders as $loader) {
+            $twig = $loader->load($twig);
+        }
         
         return $twig;
+    }
+
+    /**
+     * @return LoaderInterface[]
+     */
+    public function getLoaders(): array
+    {
+        return $this->loaders;
+    }
+
+    /**
+     * @param LoaderInterface[] $loaders
+     *
+     * @return TwigTemplateContentGenerator
+     */
+    public function setLoaders(LoaderInterface ...$loaders): TwigTemplateContentGenerator
+    {
+        $this->loaders = $loaders;
+        return $this;
+    }
+
+    /**
+     * @param LoaderInterface $loaders
+     *
+     * @return TwigTemplateContentGenerator
+     */
+    public function addLoader(LoaderInterface $loaders): TwigTemplateContentGenerator
+    {
+        $this->loaders[] = $loaders;
+        return $this;
     }
 }
