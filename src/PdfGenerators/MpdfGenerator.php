@@ -13,7 +13,7 @@ class MpdfGenerator implements PdfGeneratorInterface
     private array $templates = [];
     private PageSize $pageSize;
     private PageMargins $pageMargins;
-    private string $css;
+    private string $css = '';
     private bool $css_written = false;
 
     /**
