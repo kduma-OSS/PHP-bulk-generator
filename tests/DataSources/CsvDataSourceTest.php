@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\DataSources;
 
 use Kduma\BulkGenerator\DataSources\CsvDataSource;
 use PHPUnit\Framework\TestCase;
 
-class CsvDataSourceTest extends TestCase
+final class CsvDataSourceTest extends TestCase
 {
     public function testReadingBasicCsvFile()
     {

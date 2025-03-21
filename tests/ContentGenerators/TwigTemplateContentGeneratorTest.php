@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\ContentGenerators;
 
 use Kduma\BulkGenerator\ContentGenerators\TwigTemplateContentGenerator;
 use PHPUnit\Framework\TestCase;
 
-class TwigTemplateContentGeneratorTest extends TestCase
+final class TwigTemplateContentGeneratorTest extends TestCase
 {
     public function testGetContent()
     {

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\ContentGenerators\Twig;
 
 use Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper;
 use PHPUnit\Framework\TestCase;
 
-class HtmlAttributesHelperTest extends TestCase
+final class HtmlAttributesHelperTest extends TestCase
 {
 
     public function test()

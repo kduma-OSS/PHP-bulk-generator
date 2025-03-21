@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\DataSources;
 
 use Kduma\BulkGenerator\DataSources\CsvWithHeadersDataSource;
 use PHPUnit\Framework\TestCase;
 
-class CsvWithHeadersDataSourceTest extends TestCase
+final class CsvWithHeadersDataSourceTest extends TestCase
 {
     public function testGettingHeaders()
     {

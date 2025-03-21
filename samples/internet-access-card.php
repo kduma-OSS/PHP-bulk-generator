@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Kduma\BulkGenerator\ContentGenerators\TwigTemplateContentGenerator;
 use Kduma\BulkGenerator\DataSources\PassthroughDataSource;
 use Kduma\BulkGenerator\PdfGenerators\MpdfGenerator;
@@ -31,7 +33,7 @@ $pdfGenerator->setCss(/** @lang CSS */ <<<CSS
         padding: 0;
         line-height: 0.7;
     }
-    
+
     .center {
         vertical-align: middle;
         text-align: center;
@@ -43,7 +45,7 @@ $pdfGenerator->setCss(/** @lang CSS */ <<<CSS
         vertical-align: top;
         color: #000044;
     }
-    
+
     .barcodecell {
         text-align: center;
         vertical-align: middle;
@@ -58,11 +60,11 @@ $content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
         </div>
         {{ barcode }}
     {% endBox %}
-    
+
     {% box 32, 33, 22, 6 with {"class": "username center"} as table %}
         {{ username }}
     {% endBox %}
-    
+
     {% box 32, 42, 22, 6 with {"class": "password center"} as table %}
         {{ password }}
     {% endBox %}

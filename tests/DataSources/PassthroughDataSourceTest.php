@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\DataSources;
 
 use Kduma\BulkGenerator\DataSources\PassthroughDataSource;
 use PHPUnit\Framework\TestCase;
 use Tightenco\Collect\Support\Collection;
 
-class PassthroughDataSourceTest extends TestCase
+final class PassthroughDataSourceTest extends TestCase
 {
 
     public function testGetData()

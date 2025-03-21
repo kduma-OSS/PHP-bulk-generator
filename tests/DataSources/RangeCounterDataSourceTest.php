@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\DataSources;
 
 use Kduma\BulkGenerator\DataSources\RangeCounterDataSource;
 use PHPUnit\Framework\TestCase;
 
-class RangeCounterDataSourceTest extends TestCase
+final class RangeCounterDataSourceTest extends TestCase
 {
     public function testGetDataForRisingRange()
     {

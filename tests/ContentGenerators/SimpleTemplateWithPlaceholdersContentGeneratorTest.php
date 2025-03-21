@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kduma\BulkGenerator\Tests\ContentGenerators;
 
 use Kduma\BulkGenerator\ContentGenerators\SimpleTemplateWithPlaceholdersContentGenerator;
 use PHPUnit\Framework\TestCase;
 
-class SimpleTemplateWithPlaceholdersContentGeneratorTest extends TestCase
+final class SimpleTemplateWithPlaceholdersContentGeneratorTest extends TestCase
 {
     public function testGetContent()
     {
