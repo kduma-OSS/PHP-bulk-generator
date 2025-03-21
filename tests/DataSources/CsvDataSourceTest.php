@@ -9,9 +9,9 @@ class CsvDataSourceTest extends TestCase
 {
     public function testReadingBasicCsvFile()
     {
-        $sut = new CsvDataSource(__DIR__ . '/../stubs/basic_csv.csv');
+        $csvDataSource = new CsvDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
-        $data = $sut->getData();
+        $data = $csvDataSource->getData();
         
         $this->assertSame(
             [

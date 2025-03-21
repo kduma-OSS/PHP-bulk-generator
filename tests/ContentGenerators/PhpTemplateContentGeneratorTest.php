@@ -9,16 +9,16 @@ class PhpTemplateContentGeneratorTest extends TestCase
 {
     public function testGetContent()
     {
-        $sut = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_basic_template.php');
+        $phpTemplateContentGenerator = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_basic_template.php');
 
-        $this->assertSame('Hello John!', $sut->getContent(['name' => 'John']));
+        $this->assertSame('Hello John!', $phpTemplateContentGenerator->getContent(['name' => 'John']));
     }
     
     public function testGetContentWithArray()
     {
-        $sut = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_array_template.php');
+        $phpTemplateContentGenerator = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_array_template.php');
 
-        $this->assertSame('Hello John!', $sut->getContent([
+        $this->assertSame('Hello John!', $phpTemplateContentGenerator->getContent([
             'user' => [
                 'name' => 'John'
             ]

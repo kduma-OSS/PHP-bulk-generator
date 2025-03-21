@@ -9,9 +9,9 @@ use Twig\Environment;
 interface LoaderInterface
 {
     /**
-     * @param Environment $environment
+     * @param Environment $twigEnvironment
      *
      * @return Environment
      */
-    public function load(Environment $environment): Environment;
+    public function load(Environment $twigEnvironment): Environment;
 }

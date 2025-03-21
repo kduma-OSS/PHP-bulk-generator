@@ -33,9 +33,9 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
 
     public function getContent(array $variables): string
     {
-        $twig = $this->buildTwigEnvironment();
+        $twigEnvironment = $this->buildTwigEnvironment();
 
-        return $twig->render('index', $variables);
+        return $twigEnvironment->render('index', $variables);
     }
 
     /**
@@ -43,11 +43,11 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
      */
     protected function buildTwigEnvironment(): \Twig\Environment
     {
-        $loader = new \Twig\Loader\ArrayLoader([
+        $arrayLoader = new \Twig\Loader\ArrayLoader([
                 'index' => $this->template,
             ] + $this->partials);
 
-        $twig = new \Twig\Environment($loader, [
+        $twig = new \Twig\Environment($arrayLoader, [
 //            'cache' => __DIR__.'/../../cache/'
         ]);
         
@@ -80,13 +80,13 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
     }
 
     /**
-     * @param LoaderInterface $loaders
+     * @param LoaderInterface $loader
      *
      * @return TwigTemplateContentGenerator
      */
-    public function addLoader(LoaderInterface $loaders): TwigTemplateContentGenerator
+    public function addLoader(LoaderInterface $loader): TwigTemplateContentGenerator
     {
-        $this->loaders[] = $loaders;
+        $this->loaders[] = $loader;
         return $this;
     }
 }

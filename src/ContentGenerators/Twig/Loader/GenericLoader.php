@@ -27,10 +27,10 @@ class GenericLoader implements LoaderInterface
     /**
      * @inheritDoc
      */
-    public function load(Environment $environment): Environment
+    public function load(Environment $twigEnvironment): Environment
     {
         $callback = $this->callback;
         
-        return $callback($environment) ?? $environment;
+        return $callback($twigEnvironment) ?? $twigEnvironment;
     }
 }

@@ -14,7 +14,7 @@ class SandBoxExtensionLoader implements LoaderInterface
     /**
      * @inheritDoc
      */
-    public function load(Environment $environment): Environment
+    public function load(Environment $twigEnvironment): Environment
     {
         $tags = ['if'];
 
@@ -30,10 +30,10 @@ class SandBoxExtensionLoader implements LoaderInterface
 
         $functions = ['range'];
 
-        $policy = new SecurityPolicy($tags, $filters, $methods, $properties, $functions);
+        $securityPolicy = new SecurityPolicy($tags, $filters, $methods, $properties, $functions);
 
-        $environment->addExtension(new SandboxExtension($policy, true));
+        $twigEnvironment->addExtension(new SandboxExtension($securityPolicy, true));
 
-        return $environment;
+        return $twigEnvironment;
     }
 }

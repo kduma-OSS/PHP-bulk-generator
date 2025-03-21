@@ -9,9 +9,9 @@ class CsvWithHeadersDataSourceTest extends TestCase
 {
     public function testGettingHeaders()
     {
-        $sut = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
+        $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
-        $data = $sut->getHeaders();
+        $data = $csvWithHeadersDataSource->getHeaders();
 
         $this->assertSame(
             ['id','name','city'],
@@ -21,9 +21,9 @@ class CsvWithHeadersDataSourceTest extends TestCase
 
     public function testReadingBasicCsvFileWithHeaders()
     {
-        $sut = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
+        $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
-        $data = $sut->getData();
+        $data = $csvWithHeadersDataSource->getData();
 
         $this->assertSame(
             [
@@ -44,9 +44,9 @@ class CsvWithHeadersDataSourceTest extends TestCase
 
     public function testReadingMissingColumnsCsvFileWithHeaders()
     {
-        $sut = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/missing_columns_csv.csv');
+        $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/missing_columns_csv.csv');
 
-        $data = $sut->getData();
+        $data = $csvWithHeadersDataSource->getData();
 
         $this->assertEquals(
             [

@@ -13,8 +13,8 @@ class PassthroughDataSourceTest extends TestCase
     {
         $data = [1, 2, 3];
         
-        $sut = new PassthroughDataSource($data);
+        $passthroughDataSource = new PassthroughDataSource($data);
 
-        $this->assertSame($data, $sut->getData());
+        $this->assertSame($data, $passthroughDataSource->getData());
     }
 }

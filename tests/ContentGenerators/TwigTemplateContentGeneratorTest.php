@@ -9,16 +9,16 @@ class TwigTemplateContentGeneratorTest extends TestCase
 {
     public function testGetContent()
     {
-        $sut = new TwigTemplateContentGenerator('Hello {{name}}!');
+        $twigTemplateContentGenerator = new TwigTemplateContentGenerator('Hello {{name}}!');
         
-        $this->assertSame('Hello John!', $sut->getContent(['name' => 'John']));
+        $this->assertSame('Hello John!', $twigTemplateContentGenerator->getContent(['name' => 'John']));
     }
     
     public function testGetContentWithArray()
     {
-        $sut = new TwigTemplateContentGenerator('Hello {{user.name}}!');
+        $twigTemplateContentGenerator = new TwigTemplateContentGenerator('Hello {{user.name}}!');
         
-        $this->assertSame('Hello John!', $sut->getContent([
+        $this->assertSame('Hello John!', $twigTemplateContentGenerator->getContent([
             'user' => [
                 'name' => 'John'
             ]

@@ -38,13 +38,13 @@ class OverridableBulkGenerator extends BulkGenerator
     /**
      * OverridableBulkGenerator constructor.
      *
-     * @param DataSourceInterface   $data_source
-     * @param PdfGeneratorInterface $pdf_generator
+     * @param DataSourceInterface $dataSource
+     * @param PdfGeneratorInterface $pdfGenerator
      * @param string|callable       $template_resolver
      */
-    public function __construct(DataSourceInterface $data_source, PdfGeneratorInterface $pdf_generator, $template_resolver)
+    public function __construct(DataSourceInterface $dataSource, PdfGeneratorInterface $pdfGenerator, $template_resolver)
     {
-        parent::__construct($data_source, $pdf_generator);
+        parent::__construct($dataSource, $pdfGenerator);
         $this->template_resolver = $template_resolver;
     }
 
@@ -145,17 +145,17 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param ContentGeneratorInterface|null $front_content_generator
+     * @param ContentGeneratorInterface|null $contentGenerator
      * @param string|null                    $template
      *
      * @return $this
      */
-    public function setFrontContentGenerator(?ContentGeneratorInterface $front_content_generator, string $template = null): OverridableBulkGenerator
+    public function setFrontContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
         if($template === null)
-            return parent::setFrontContentGenerator($front_content_generator);
+            return parent::setFrontContentGenerator($contentGenerator);
 
-        $this->front_content_generator_overrides[$template] = $front_content_generator;
+        $this->front_content_generator_overrides[$template] = $contentGenerator;
         return $this;
     }
 
@@ -175,17 +175,17 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param ContentGeneratorInterface|null $back_content_generator
+     * @param ContentGeneratorInterface|null $contentGenerator
      * @param string|null                    $template
      *
      * @return $this
      */
-    public function setBackContentGenerator(?ContentGeneratorInterface $back_content_generator, string $template = null): OverridableBulkGenerator
+    public function setBackContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
         if($template === null)
-            return parent::setBackContentGenerator($back_content_generator);
+            return parent::setBackContentGenerator($contentGenerator);
 
-        $this->back_content_generator_overrides[$template] = $back_content_generator;
+        $this->back_content_generator_overrides[$template] = $contentGenerator;
         return $this;
     }
 

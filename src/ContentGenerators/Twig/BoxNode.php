@@ -13,10 +13,10 @@ class BoxNode extends Node
 {
     private string $as = 'div';
 
-    public function __construct(Node $body, private readonly bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, ?string $tag = null)
+    public function __construct(Node $node, private readonly bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, ?string $tag = null)
     {
         $nodes = [
-            'body' => $body,
+            'body' => $node,
             'left' => $left,
             'top' => $top,
         ];
@@ -58,7 +58,7 @@ class BoxNode extends Node
     protected function compileDiv(Compiler $compiler): void
     {
         $compiler
-            ->write('$attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([\'style\' => [\'position\' => \'absolute\', \'left\' => (')
+            ->write('$attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . "::start(['style' => ['position' => 'absolute', 'left' => (")
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
@@ -121,7 +121,7 @@ class BoxNode extends Node
     protected function compileTable(Compiler $compiler): void
     {
         $compiler
-            ->write('$div_attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([\'style\' => [\'position\' => \'absolute\', \'padding\' => \'0\', \'left\' => (')
+            ->write('$div_attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . "::start(['style' => ['position' => 'absolute', 'padding' => '0', 'left' => (")
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
