@@ -35,8 +35,8 @@ class BulkGenerator
         if(!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator)
             throw new \Exception("No templates provided to generate!");
 
-        $has_front_side = $this->front_content_generator || $this->front_template;
-        $has_back_side = $this->back_template || $this->back_content_generator;
+        $has_front_side = $this->front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface || $this->front_template;
+        $has_back_side = $this->back_template || $this->back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface;
         $this->pdf_generator->start($has_front_side && $has_back_side);
 
         foreach ($data as $row) {

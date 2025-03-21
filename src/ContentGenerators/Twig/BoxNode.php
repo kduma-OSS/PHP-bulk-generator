@@ -20,19 +20,19 @@ class BoxNode extends Node
             'left' => $left,
             'top' => $top,
         ];
-        if (null !== $attributes) {
+        if ($attributes instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['attributes'] = $attributes;
         }
-        if (null !== $table_attributes) {
+        if ($table_attributes instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['table_attributes'] = $table_attributes;
         }
         if (null !== $as) {
             $this->as = $as;
         }
-        if (null !== $width) {
+        if ($width instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['width'] = $width;
         }
-        if (null !== $height) {
+        if ($height instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['height'] = $height;
         }
 
