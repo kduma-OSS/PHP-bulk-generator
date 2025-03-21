@@ -6,31 +6,31 @@ namespace Kduma\BulkGenerator\PdfGenerators;
 
 use Kduma\BulkGenerator\PageOptions\PageMargins;
 use Kduma\BulkGenerator\PageOptions\PageSize;
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
 
 class MpdfGenerator implements PdfGeneratorInterface
 {
-    private \Mpdf\Mpdf $mpdf;
+    private Mpdf $mpdf;
     private array $templates = [];
     private readonly PageSize $pageSize;
-    private readonly PageMargins $pageMargins;
     private string $css = '';
     private bool $css_written = false;
 
     /**
      * MpdfGenerator constructor.
      *
-     * @param PageSize    $pageSize
-     * @param PageMargins $pageMargins
+     * @param PageSize|null $pageSize
+     * @param PageMargins|null $pageMargins
      */
-    public function __construct(PageSize $pageSize = null, PageMargins $pageMargins = null)
+    public function __construct(?PageSize $pageSize = null, private readonly PageMargins $pageMargins = new PageMargins(0, 0, 0, 0, 0, 0))
     {
         $this->pageSize = $pageSize ?? PageSize::fromName('A4');
-        $this->pageMargins = $pageMargins ?? new PageMargins(0, 0, 0, 0, 0, 0);
     }
 
-    public function start(bool $doubleSided)
+    public function start(bool $doubleSided): void
     {
-        $this->mpdf = new \Mpdf\Mpdf([
+        $this->mpdf = new Mpdf([
             'mode' => 'utf-8',
             
             'format' => [$this->pageSize->getWidth(), $this->pageSize->getHeight()],
@@ -50,7 +50,7 @@ class MpdfGenerator implements PdfGeneratorInterface
         $this->css_written = false;
     }
 
-    public function insert(string $html, string $template = null)
+    public function insert(string $html, ?string $template = null): void
     {
         $this->mpdf->AddPage();
 

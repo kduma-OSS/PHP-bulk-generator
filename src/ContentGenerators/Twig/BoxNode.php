@@ -13,7 +13,7 @@ class BoxNode extends Node
 {
     private string $as = 'div';
 
-    public function __construct(Node $body, private readonly bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, string $tag = null)
+    public function __construct(Node $body, private readonly bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, ?string $tag = null)
     {
         $nodes = [
             'body' => $body,
