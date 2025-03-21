@@ -9,16 +9,13 @@ use RecursiveIteratorIterator;
 
 class PhpTemplateContentGenerator implements ContentGeneratorInterface
 {
-    private string $template;
-
     /**
      * PhpTemplateContentGenerator constructor.
      *
      * @param string $template
      */
-    public function __construct(string $template)
+    public function __construct(private readonly string $template)
     {
-        $this->template = $template;
     }
 
     public function getContent(array $variables): string

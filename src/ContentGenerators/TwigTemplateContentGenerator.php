@@ -16,9 +16,6 @@ use Twig\Token;
 
 class TwigTemplateContentGenerator implements ContentGeneratorInterface
 {
-    private string $template;
-    private array  $partials;
-    
     /**
      * @var LoaderInterface[]
      */
@@ -30,10 +27,8 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
      * @param string $template
      * @param array  $partials
      */
-    public function __construct(string $template, array $partials = [])
+    public function __construct(private readonly string $template, private readonly array $partials = [])
     {
-        $this->template = $template;
-        $this->partials = $partials;
     }
 
     public function getContent(array $variables): string

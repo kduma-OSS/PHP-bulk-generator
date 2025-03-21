@@ -9,11 +9,6 @@ use Tightenco\Collect\Support\LazyCollection;
 
 class CsvDataSource implements DataSourceInterface
 {
-    private string $filename;
-    private string $delimiter;
-    private string $enclosure;
-    private string $escape;
-
     /**
      * CsvDataSource constructor.
      *
@@ -22,12 +17,8 @@ class CsvDataSource implements DataSourceInterface
      * @param string $enclosure
      * @param string $escape
      */
-    public function __construct(string $filename, string $delimiter = ',', string $enclosure = '"', string $escape = '\\')
+    public function __construct(private readonly string $filename, private readonly string $delimiter = ',', private readonly string $enclosure = '"', private readonly string $escape = '\\')
     {
-        $this->filename = $filename;
-        $this->delimiter = $delimiter;
-        $this->enclosure = $enclosure;
-        $this->escape = $escape;
     }
 
     public function getData(): array

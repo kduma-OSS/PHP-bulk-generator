@@ -12,12 +12,9 @@ use Twig\Node\Node;
 class BoxNode extends Node
 {
     private string $as = 'div';
-    private bool   $bordered = false;
 
-    public function __construct(Node $body, bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, string $tag = null)
+    public function __construct(Node $body, private readonly bool $bordered, ?AbstractExpression $attributes, AbstractExpression $left, AbstractExpression $top, ?AbstractExpression $width, ?AbstractExpression $height, ?string $as, ?AbstractExpression $table_attributes, int $lineno, string $tag = null)
     {
-        $this->bordered = $bordered;
-        
         $nodes = [
             'body' => $body,
             'left' => $left,

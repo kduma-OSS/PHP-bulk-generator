@@ -13,10 +13,6 @@ class BulkGenerator
     
     protected ?ContentGeneratorInterface $back_content_generator = null;
     protected ?string $back_template = null;
-    
-    protected DataSourceInterface $data_source;
-    
-    protected PdfGeneratorInterface $pdf_generator;
 
     /**
      * BulkGenerator constructor.
@@ -24,10 +20,8 @@ class BulkGenerator
      * @param DataSourceInterface   $data_source
      * @param PdfGeneratorInterface $pdf_generator
      */
-    public function __construct(DataSourceInterface $data_source, PdfGeneratorInterface $pdf_generator)
+    public function __construct(protected DataSourceInterface $data_source, protected PdfGeneratorInterface $pdf_generator)
     {
-        $this->data_source = $data_source;
-        $this->pdf_generator = $pdf_generator;
     }
 
 

@@ -4,7 +4,7 @@
 namespace Kduma\BulkGenerator\ContentGenerators\Twig;
 
 
-class HtmlAttributesHelper
+class HtmlAttributesHelper implements \Stringable
 {
     private array $values;
 
@@ -30,7 +30,7 @@ class HtmlAttributesHelper
         return $this;
     }
     
-    public function __toString()
+    public function __toString(): string
     {
         $values = [];
 
@@ -59,9 +59,7 @@ class HtmlAttributesHelper
             return [$key => implode('; ', array_map(fn($value, $key) => $key.': '.$value, array_values($value), array_keys($value)))];
         }, array_values($values), array_keys($values)));
         
-        $values = array_map(function ($value, $key) {
-            return $key.'="'.htmlentities($value).'"';
-        }, array_values($values), array_keys($values));
+        $values = array_map(fn($value, $key) => $key.'="'.htmlentities((string) $value).'"', array_values($values), array_keys($values));
         
         return implode(' ', $values);
     }

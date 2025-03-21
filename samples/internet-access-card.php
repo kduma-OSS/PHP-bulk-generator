@@ -16,7 +16,7 @@ function str_rand(int $length = 64){ // 64 = 32
 $dataSource = new PassthroughDataSource(
     array_map(fn($row) => [
         'number' => $row,
-        'barcode' => rand(100000, 999999),
+        'barcode' => random_int(100000, 999999),
         'username' => str_rand(8),
         'password' => str_rand(8),
     ], range(1, 100))

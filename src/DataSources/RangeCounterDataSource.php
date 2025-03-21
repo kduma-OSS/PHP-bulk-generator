@@ -9,10 +9,6 @@ use Tightenco\Collect\Support\LazyCollection;
 
 class RangeCounterDataSource implements DataSourceInterface
 {
-    private int $from;
-    private int $to;
-    private int $increment;
-
     /**
      * RangeCounterDataSource constructor.
      *
@@ -20,11 +16,8 @@ class RangeCounterDataSource implements DataSourceInterface
      * @param int $to
      * @param int $increment
      */
-    public function __construct(int $from, int $to, int $increment = 1)
+    public function __construct(private readonly int $from, private readonly int $to, private readonly int $increment = 1)
     {
-        $this->from = $from;
-        $this->to = $to;
-        $this->increment = $increment;
     }
 
     public function getData(): array

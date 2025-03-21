@@ -41,7 +41,7 @@ class BoxTokenParser extends AbstractTokenParser
 
         $stream->expect(Token::BLOCK_END_TYPE);
 
-        $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+        $body = $this->parser->subparse($this->decideBlockEnd(...), true);
         $stream->expect(Token::BLOCK_END_TYPE);
 
         return new BoxNode($body, $bordered, $attributes ?? null, $left, $top, $width ?? null, $height ?? null, $as ?? null, $table_attributes ?? null, $token->getLine(), $this->getTag());

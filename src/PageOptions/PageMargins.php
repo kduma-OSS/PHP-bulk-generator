@@ -6,13 +6,6 @@ namespace Kduma\BulkGenerator\PageOptions;
 
 class PageMargins
 {
-    private float $left;
-    private float $right;
-    private float $top;
-    private float $bottom;
-    private float $header;
-    private float $footer;
-
     /**
      * PageMargins constructor.
      *
@@ -23,14 +16,8 @@ class PageMargins
      * @param float $header
      * @param float $footer
      */
-    public function __construct(float $left = 15, float $right = 15, float $top = 16, float $bottom = 16, float $header = 9, float $footer = 9)
+    public function __construct(private readonly float $left = 15, private readonly float $right = 15, private readonly float $top = 16, private readonly float $bottom = 16, private readonly float $header = 9, private readonly float $footer = 9)
     {
-        $this->left = $left;
-        $this->right = $right;
-        $this->top = $top;
-        $this->bottom = $bottom;
-        $this->header = $header;
-        $this->footer = $footer;
     }
 
     public static function makeByAxis(float $horizontal = 15, float $vertical = 16, float $header = 9, float $footer = 9): PageMargins

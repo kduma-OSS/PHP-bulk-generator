@@ -11,8 +11,8 @@ class MpdfGenerator implements PdfGeneratorInterface
 {
     private \Mpdf\Mpdf $mpdf;
     private array $templates = [];
-    private PageSize $pageSize;
-    private PageMargins $pageMargins;
+    private readonly PageSize $pageSize;
+    private readonly PageMargins $pageMargins;
     private string $css = '';
     private bool $css_written = false;
 

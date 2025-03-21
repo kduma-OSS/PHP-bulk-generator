@@ -8,10 +8,6 @@ use Mpdf\PageFormat;
 
 class PageSize
 {
-    private float $width;
-    private float $height;
-    private bool  $landscape;
-
     /**
      * @return float
      */
@@ -43,11 +39,8 @@ class PageSize
      * @param float $height
      * @param bool  $landscape
      */
-    public function __construct(float $width, float $height, bool $landscape = false)
+    public function __construct(private readonly float $width, private readonly float $height, private readonly bool $landscape = false)
     {
-        $this->width = $width;
-        $this->height = $height;
-        $this->landscape = $landscape;
     }
 
     public static function fromName(string $format, bool $landscape = false): PageSize

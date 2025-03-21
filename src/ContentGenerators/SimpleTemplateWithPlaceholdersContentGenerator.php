@@ -9,16 +9,13 @@ use RecursiveIteratorIterator;
 
 class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGeneratorInterface
 {
-    private string $template;
-
     /**
      * SimpleTemplateWithPlaceholdersContentGenerator constructor.
      *
      * @param string $template
      */
-    public function __construct(string $template)
+    public function __construct(private readonly string $template)
     {
-        $this->template = $template;
     }
     
     private function dot(array $array): array {
@@ -29,7 +26,7 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
             foreach (range(0, $iterator->getDepth()) as $depth) {
                 $keys[] = $iterator->getSubIterator($depth)->key();
             }
-            $result[ join('.', $keys) ] = $leafValue;
+            $result[ implode('.', $keys) ] = $leafValue;
         }
         
         return $result;
