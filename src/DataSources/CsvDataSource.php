@@ -29,6 +29,7 @@ class CsvDataSource implements DataSourceInterface
             while (($row = fgetcsv($handle, 0, $this->delimiter, $this->enclosure, $this->escape)) !== FALSE) {
                 $data[] = array_merge([], ...array_map(fn($value, $index) => ['column_'.$index => $value], array_values($row), array_keys($row)));
             }
+
             fclose($handle);
         }
         

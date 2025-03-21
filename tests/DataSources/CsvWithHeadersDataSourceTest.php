@@ -18,6 +18,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
             $data
         );
     }
+
     public function testReadingBasicCsvFileWithHeaders()
     {
         $sut = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
@@ -40,6 +41,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
             $data
         );
     }
+
     public function testReadingMissingColumnsCsvFileWithHeaders()
     {
         $sut = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/missing_columns_csv.csv');

@@ -9,9 +9,11 @@ use Kduma\BulkGenerator\PdfGenerators\PdfGeneratorInterface;
 class BulkGenerator
 {
     protected ?ContentGeneratorInterface $front_content_generator = null;
+
     protected ?string $front_template = null;
-    
+
     protected ?ContentGeneratorInterface $back_content_generator = null;
+
     protected ?string $back_template = null;
 
     /**
@@ -28,10 +30,10 @@ class BulkGenerator
     public function generate(string $filename)
     {
         $data = $this->data_source->getData();
-        
+
         if(count($data) == 0)
             throw new \Exception("Data source is empty!");
-        
+
         if(!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator)
             throw new \Exception("No templates provided to generate!");
 
@@ -42,10 +44,10 @@ class BulkGenerator
         foreach ($data as $row) {
             $this->renderOne($row, $has_front_side, $has_back_side);
         }
-        
+
         file_put_contents($filename, $this->pdf_generator->finish());
     }
-    
+
     /**
      * @param array $row
      * @param bool  $has_front_side

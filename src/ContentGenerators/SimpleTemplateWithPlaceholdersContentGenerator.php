@@ -26,6 +26,7 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
             foreach (range(0, $iterator->getDepth()) as $depth) {
                 $keys[] = $iterator->getSubIterator($depth)->key();
             }
+
             $result[ implode('.', $keys) ] = $leafValue;
         }
         
@@ -39,7 +40,7 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
         $variables['variables'] = print_r($variables, true);
 
         return str_replace(
-            array_map(fn($key) => "{{$key}}", array_keys($variables)),
+            array_map(fn($key) => sprintf('{%s}', $key), array_keys($variables)),
             array_values($variables), 
             $this->template
         );

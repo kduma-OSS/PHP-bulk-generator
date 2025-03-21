@@ -14,14 +14,17 @@ class OverridableBulkGenerator extends BulkGenerator
      * @var array
      */
     protected array $front_template_overrides = [];
+
     /**
      * @var array
      */
     protected array $front_content_generator_overrides = [];
+
     /**
      * @var array
      */
     protected array $back_content_generator_overrides = [];
+
     /**
      * @var array
      */
@@ -54,10 +57,10 @@ class OverridableBulkGenerator extends BulkGenerator
     protected function renderOne(array $row, bool $has_front_side, bool $has_back_side): void
     {
         $template = $this->getTemplateName($row);
-        
+
         if ($has_front_side) {
             $front_content_generator = $this->getFrontContentGenerator($template) ?? $this->getFrontContentGenerator();
-            
+
             $this->pdf_generator->insert(
                 $front_content_generator ? $front_content_generator->getContent($row) : '',
                 $this->getFrontTemplate($template) ?? $this->getFrontTemplate()
@@ -66,7 +69,7 @@ class OverridableBulkGenerator extends BulkGenerator
 
         if ($has_back_side) {
             $back_content_generator = $this->getBackContentGenerator($template) ?? $this->getBackContentGenerator();
-            
+
             $this->pdf_generator->insert(
                 $back_content_generator ? $back_content_generator->getContent($row) : '',
                 $this->getBackTemplate($template) ?? $this->getBackTemplate()
@@ -83,9 +86,9 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if(is_string($this->template_resolver))
             return $row[$this->template_resolver];
-        
+
         $callback = $this->template_resolver;
-        
+
         return $callback($row);
     }
 
@@ -137,7 +140,7 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if($template === null)
             return parent::getBackTemplate();
-        
+
         return $this->back_template_overrides[$template] ?? null;
     }
 
@@ -151,7 +154,7 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if($template === null)
             return parent::setFrontContentGenerator($front_content_generator);
-        
+
         $this->front_content_generator_overrides[$template] = $front_content_generator;
         return $this;
     }
@@ -166,7 +169,7 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if($template === null)
             return parent::setFrontTemplate($front_template);
-        
+
         $this->front_template_overrides[$template] = $front_template;
         return $this;
     }
@@ -181,7 +184,7 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if($template === null)
             return parent::setBackContentGenerator($back_content_generator);
-        
+
         $this->back_content_generator_overrides[$template] = $back_content_generator;
         return $this;
     }
@@ -196,7 +199,7 @@ class OverridableBulkGenerator extends BulkGenerator
     {
         if($template === null)
             return parent::setBackTemplate($back_template);
-        
+
         $this->back_template_overrides[$template] = $back_template;
         return $this;
     }

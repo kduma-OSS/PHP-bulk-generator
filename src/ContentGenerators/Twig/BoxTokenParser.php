@@ -21,17 +21,18 @@ class BoxTokenParser extends AbstractTokenParser
         $top = $parser->getExpressionParser()->parseExpression();
         if($stream->nextIf(Token::PUNCTUATION_TYPE, ','))
             $width = $parser->getExpressionParser()->parseExpression();
+
         if($stream->nextIf(Token::PUNCTUATION_TYPE, ','))
             $height = $parser->getExpressionParser()->parseExpression();
 
-        
+
         if ($stream->nextIf(Token::NAME_TYPE, 'with')) {
             $attributes = $parser->getExpressionParser()->parseExpression();
         }
-        
+
         if ($stream->nextIf(Token::NAME_TYPE, 'as')) {
             $as = $stream->expect(Token::NAME_TYPE)->getValue();
-            
+
             if ($stream->nextIf(Token::NAME_TYPE, 'with')) {
                 $table_attributes = $parser->getExpressionParser()->parseExpression();
             }

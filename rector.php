@@ -12,6 +12,7 @@ return RectorConfig::configure()
     ])
     ->withPhpSets(php82: true)
     ->withPreparedSets(
+        codingStyle: true,
         instanceOf: true,
         phpunitCodeQuality: true,
     )

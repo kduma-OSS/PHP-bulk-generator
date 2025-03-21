@@ -10,9 +10,9 @@ class RangeCounterDataSourceTest extends TestCase
     public function testGetDataForRisingRange()
     {
         $sut = new RangeCounterDataSource(1, 4);
-        
+
         $data = $sut->getData();
-        
+
         $this->assertSame([
             [
                 'counter' => 1
@@ -28,13 +28,13 @@ class RangeCounterDataSourceTest extends TestCase
             ]
         ], $data);
     }
-    
+
     public function testGetDataForFallingRange()
     {
         $sut = new RangeCounterDataSource(4, 1);
-        
+
         $data = $sut->getData();
-        
+
         $this->assertSame([
             [
                 'counter' => 4
@@ -50,12 +50,13 @@ class RangeCounterDataSourceTest extends TestCase
             ]
         ], $data);
     }
+
     public function testGetDataForRisingRangeWithSpecifiedIncrements()
     {
         $sut = new RangeCounterDataSource(1, 4, 2);
-        
+
         $data = $sut->getData();
-        
+
         $this->assertSame([
             [
                 'counter' => 1
@@ -65,13 +66,13 @@ class RangeCounterDataSourceTest extends TestCase
             ]
         ], $data);
     }
-    
+
     public function testGetDataForFallingRangeWithSpecifiedIncrements()
     {
         $sut = new RangeCounterDataSource(4, 1, 2);
-        
+
         $data = $sut->getData();
-        
+
         $this->assertSame([
             [
                 'counter' => 4

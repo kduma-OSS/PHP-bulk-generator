@@ -12,9 +12,13 @@ use Mpdf\MpdfException;
 class MpdfGenerator implements PdfGeneratorInterface
 {
     private Mpdf $mpdf;
+
     private array $templates = [];
+
     private readonly PageSize $pageSize;
+
     private string $css = '';
+
     private bool $css_written = false;
 
     /**
@@ -32,12 +36,12 @@ class MpdfGenerator implements PdfGeneratorInterface
     {
         $this->mpdf = new Mpdf([
             'mode' => 'utf-8',
-            
+
             'format' => [$this->pageSize->getWidth(), $this->pageSize->getHeight()],
             'orientation' => $this->pageSize->isLandscape() ? 'L' : 'P',
-            
+
             'mirrorMargins' => $doubleSided,
-            
+
             'margin_left' => $this->pageMargins->getLeft(),
             'margin_right' => $this->pageMargins->getRight(),
             'margin_top' => $this->pageMargins->getTop(),
@@ -45,7 +49,7 @@ class MpdfGenerator implements PdfGeneratorInterface
             'margin_header' => $this->pageMargins->getHeader(),
             'margin_footer' => $this->pageMargins->getFooter(),
         ]);
-        
+
         $this->templates = [];
         $this->css_written = false;
     }
@@ -55,19 +59,19 @@ class MpdfGenerator implements PdfGeneratorInterface
         $this->mpdf->AddPage();
 
         if(!$this->css_written) {
-            $this->mpdf->WriteHTML("<style>{$this->css}</style>");
+            $this->mpdf->WriteHTML(sprintf('<style>%s</style>', $this->css));
             $this->css_written = true;
         }
-        
+
         if($template) {
             if(!isset($this->templates[$template])) {
                 $this->mpdf->SetSourceFile($template);
                 $this->templates[$template] = $this->mpdf->ImportPage(1);
             }
-            
+
             $this->mpdf->UseTemplate($this->templates[$template]);
         }
-        
+
         $this->mpdf->WriteHTML($html);
     }
 

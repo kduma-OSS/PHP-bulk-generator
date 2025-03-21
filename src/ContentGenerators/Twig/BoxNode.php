@@ -23,15 +23,19 @@ class BoxNode extends Node
         if ($attributes instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['attributes'] = $attributes;
         }
+
         if ($table_attributes instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['table_attributes'] = $table_attributes;
         }
+
         if (null !== $as) {
             $this->as = $as;
         }
+
         if ($width instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['width'] = $width;
         }
+
         if ($height instanceof \Twig\Node\Expression\AbstractExpression) {
             $nodes['height'] = $height;
         }
@@ -54,7 +58,7 @@ class BoxNode extends Node
     protected function compileDiv(Compiler $compiler): void
     {
         $compiler
-            ->write("\$attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['position' => 'absolute', 'left' => (")
+            ->write('$attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([\'style\' => [\'position\' => \'absolute\', \'left\' => (')
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
@@ -117,7 +121,7 @@ class BoxNode extends Node
     protected function compileTable(Compiler $compiler): void
     {
         $compiler
-            ->write("\$div_attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['position' => 'absolute', 'padding' => '0', 'left' => (")
+            ->write('$div_attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([\'style\' => [\'position\' => \'absolute\', \'padding\' => \'0\', \'left\' => (')
             ->subcompile($this->getNode('left'))
             ->raw(").'mm', 'top' => (")
             ->subcompile($this->getNode('top'))
@@ -149,7 +153,8 @@ class BoxNode extends Node
             ->write(";");
         
         $compiler
-            ->write("\$attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start(['style' => ['border-collapse' => 'collapse', 'overflow' => 'wrap']])\n")
+            ->write('$attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([\'style\' => [\'border-collapse\' => \'collapse\', \'overflow\' => \'wrap\']])
+')
             ->indent();
         
         if ($this->hasNode('table_attributes')) {
@@ -168,7 +173,8 @@ class BoxNode extends Node
             ->write(";");
 
         $compiler
-            ->write("\$table_attributes = \\Kduma\\BulkGenerator\\ContentGenerators\\Twig\\HtmlAttributesHelper::start([])\n")
+            ->write('$table_attributes = ' . \Kduma\BulkGenerator\ContentGenerators\Twig\HtmlAttributesHelper::class . '::start([])
+')
             ->indent();
 
 
