@@ -6,7 +6,6 @@ namespace Kduma\BulkGenerator\Tests\DataSources;
 
 use Kduma\BulkGenerator\DataSources\PassthroughDataSource;
 use PHPUnit\Framework\TestCase;
-use Tightenco\Collect\Support\Collection;
 
 final class PassthroughDataSourceTest extends TestCase
 {

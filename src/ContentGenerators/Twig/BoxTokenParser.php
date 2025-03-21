@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kduma\BulkGenerator\ContentGenerators\Twig;
 
 
-use Twig\Error\SyntaxError;
 use Twig\Node\Node;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;

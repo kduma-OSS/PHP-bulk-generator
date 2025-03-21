@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator;
 
+use Exception;
 use Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface;
 use Kduma\BulkGenerator\DataSources\DataSourceInterface;
 use Kduma\BulkGenerator\PdfGenerators\PdfGeneratorInterface;
@@ -31,15 +32,15 @@ class BulkGenerator
         $data = $this->dataSource->getData();
 
         if (count($data) == 0) {
-            throw new \Exception("Data source is empty!");
+            throw new Exception("Data source is empty!");
         }
 
         if (!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator) {
-            throw new \Exception("No templates provided to generate!");
+            throw new Exception("No templates provided to generate!");
         }
 
-        $has_front_side = $this->front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface || $this->front_template;
-        $has_back_side = $this->back_template || $this->back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface;
+        $has_front_side = $this->front_content_generator instanceof ContentGeneratorInterface || $this->front_template;
+        $has_back_side = $this->back_template || $this->back_content_generator instanceof ContentGeneratorInterface;
         $this->pdfGenerator->start($has_front_side && $has_back_side);
 
         foreach ($data as $row) {
@@ -53,14 +54,14 @@ class BulkGenerator
     {
         if ($has_front_side) {
             $this->pdfGenerator->insert(
-                $this->front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $this->front_content_generator->getContent($row) : '',
+                $this->front_content_generator instanceof ContentGeneratorInterface ? $this->front_content_generator->getContent($row) : '',
                 $this->front_template
             );
         }
 
         if ($has_back_side) {
             $this->pdfGenerator->insert(
-                $this->back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $this->back_content_generator->getContent($row) : '',
+                $this->back_content_generator instanceof ContentGeneratorInterface ? $this->back_content_generator->getContent($row) : '',
                 $this->back_template
             );
         }

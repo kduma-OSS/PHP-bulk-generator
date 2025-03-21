@@ -8,7 +8,6 @@ namespace Kduma\BulkGenerator\PdfGenerators;
 use Kduma\BulkGenerator\PageOptions\PageMargins;
 use Kduma\BulkGenerator\PageOptions\PageSize;
 use Mpdf\Mpdf;
-use Mpdf\MpdfException;
 
 class MpdfGenerator implements PdfGeneratorInterface
 {

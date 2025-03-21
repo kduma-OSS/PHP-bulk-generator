@@ -6,7 +6,6 @@ namespace Kduma\BulkGenerator\ContentGenerators\Twig\Loader;
 
 
 use Twig\Environment;
-use Twig\Extension\ExtensionInterface;
 
 class GenericLoader implements LoaderInterface
 {

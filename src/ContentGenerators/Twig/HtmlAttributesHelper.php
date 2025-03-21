@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator\ContentGenerators\Twig;
 
+use Stringable;
 
-class HtmlAttributesHelper implements \Stringable
+class HtmlAttributesHelper implements Stringable
 {
     private array $values;
 

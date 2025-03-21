@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Kduma\BulkGenerator\ContentGenerators;
 
 
-use RecursiveArrayIterator;
-use RecursiveIteratorIterator;
-
 class PhpTemplateContentGenerator implements ContentGeneratorInterface
 {
     /**

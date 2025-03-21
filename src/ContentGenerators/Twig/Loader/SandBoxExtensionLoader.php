@@ -6,7 +6,6 @@ namespace Kduma\BulkGenerator\ContentGenerators\Twig\Loader;
 
 
 use Twig\Environment;
-use Twig\Extension\ExtensionInterface;
 use Twig\Extension\SandboxExtension;
 use Twig\Sandbox\SecurityPolicy;
 

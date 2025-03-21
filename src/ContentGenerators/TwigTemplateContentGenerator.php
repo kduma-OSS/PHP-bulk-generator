@@ -5,15 +5,10 @@ declare(strict_types=1);
 namespace Kduma\BulkGenerator\ContentGenerators;
 
 
-use Kduma\BulkGenerator\ContentGenerators\Twig\BoxNode;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 use Kduma\BulkGenerator\ContentGenerators\Twig\BoxTokenParser;
 use Kduma\BulkGenerator\ContentGenerators\Twig\Loader\LoaderInterface;
-use Twig\Compiler;
-use Twig\Error\SyntaxError;
-use Twig\Node\Expression\AbstractExpression;
-use Twig\Node\Expression\ArrayExpression;
-use Twig\Node\Node;
-use Twig\Token;
 
 class TwigTemplateContentGenerator implements ContentGeneratorInterface
 {
@@ -36,13 +31,13 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
         return $twigEnvironment->render('index', $variables);
     }
 
-    protected function buildTwigEnvironment(): \Twig\Environment
+    protected function buildTwigEnvironment(): Environment
     {
-        $arrayLoader = new \Twig\Loader\ArrayLoader([
+        $arrayLoader = new ArrayLoader([
                 'index' => $this->template,
             ] + $this->partials);
 
-        $twig = new \Twig\Environment($arrayLoader, [
+        $twig = new Environment($arrayLoader, [
 //            'cache' => __DIR__.'/../../cache/'
         ]);
         

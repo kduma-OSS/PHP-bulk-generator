@@ -44,7 +44,7 @@ class OverridableBulkGenerator extends BulkGenerator
             $front_content_generator = $this->getFrontContentGenerator($template) ?? $this->getFrontContentGenerator();
 
             $this->pdfGenerator->insert(
-                $front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $front_content_generator->getContent($row) : '',
+                $front_content_generator instanceof ContentGeneratorInterface ? $front_content_generator->getContent($row) : '',
                 $this->getFrontTemplate($template) ?? $this->getFrontTemplate()
             );
         }
@@ -53,7 +53,7 @@ class OverridableBulkGenerator extends BulkGenerator
             $back_content_generator = $this->getBackContentGenerator($template) ?? $this->getBackContentGenerator();
 
             $this->pdfGenerator->insert(
-                $back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $back_content_generator->getContent($row) : '',
+                $back_content_generator instanceof ContentGeneratorInterface ? $back_content_generator->getContent($row) : '',
                 $this->getBackTemplate($template) ?? $this->getBackTemplate()
             );
         }
