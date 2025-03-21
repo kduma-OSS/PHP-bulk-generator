@@ -20,11 +20,13 @@ class BoxTokenParser extends AbstractTokenParser
         $left = $parser->getExpressionParser()->parseExpression();
         $tokenStream->expect(Token::PUNCTUATION_TYPE, ',');
         $top = $parser->getExpressionParser()->parseExpression();
-        if($tokenStream->nextIf(Token::PUNCTUATION_TYPE, ','))
+        if ($tokenStream->nextIf(Token::PUNCTUATION_TYPE, ',')) {
             $width = $parser->getExpressionParser()->parseExpression();
+        }
 
-        if($tokenStream->nextIf(Token::PUNCTUATION_TYPE, ','))
+        if ($tokenStream->nextIf(Token::PUNCTUATION_TYPE, ',')) {
             $height = $parser->getExpressionParser()->parseExpression();
+        }
 
 
         if ($tokenStream->nextIf(Token::NAME_TYPE, 'with')) {
@@ -39,7 +41,7 @@ class BoxTokenParser extends AbstractTokenParser
             }
         }
 
-        $bordered = !! $tokenStream->nextIf(Token::NAME_TYPE, 'bordered');
+        $bordered = (bool) $tokenStream->nextIf(Token::NAME_TYPE, 'bordered');
 
         $tokenStream->expect(Token::BLOCK_END_TYPE);
 

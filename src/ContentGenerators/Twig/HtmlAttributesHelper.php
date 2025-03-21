@@ -37,10 +37,11 @@ class HtmlAttributesHelper implements \Stringable
             foreach ($arr as $key => $value) {
                 if (is_array($value)) {
                     foreach ($value as $p => $v) {
-                        if($key == 'style')
+                        if ($key == 'style') {
                             $values[$key][$p] = $v;
-                        else
+                        } else {
                             $values[$key][] = $v;
+                        }
                     }
                 } else {
                     $values[$key][] = $value;
@@ -49,11 +50,13 @@ class HtmlAttributesHelper implements \Stringable
         }
         
         $values = array_merge([], ...array_map(function ($value, $key) {
-            if(!is_array($value))
+            if (!is_array($value)) {
                 return [$key => $value];
+            }
 
-            if($key != 'style')
+            if ($key != 'style') {
                 return [$key => implode(' ', $value)];
+            }
             
             return [$key => implode('; ', array_map(fn($value, $key): string => $key.': '.$value, array_values($value), array_keys($value)))];
         }, array_values($values), array_keys($values)));

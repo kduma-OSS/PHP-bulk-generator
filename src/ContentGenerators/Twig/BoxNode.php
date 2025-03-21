@@ -46,7 +46,7 @@ class BoxNode extends Node
 
     public function compile(Compiler $compiler): void
     {
-        if ($this->as == 'table') {
+        if ($this->as === 'table') {
             $this->compileTable($compiler);
         } else {
             $this->compileDiv($compiler);

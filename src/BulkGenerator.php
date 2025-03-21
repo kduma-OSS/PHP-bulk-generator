@@ -30,11 +30,13 @@ class BulkGenerator
     {
         $data = $this->dataSource->getData();
 
-        if(count($data) == 0)
+        if (count($data) == 0) {
             throw new \Exception("Data source is empty!");
+        }
 
-        if(!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator)
+        if (!$this->front_content_generator && !$this->front_template && !$this->back_template && !$this->back_content_generator) {
             throw new \Exception("No templates provided to generate!");
+        }
 
         $has_front_side = $this->front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface || $this->front_template;
         $has_back_side = $this->back_template || $this->back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface;
@@ -49,17 +51,19 @@ class BulkGenerator
 
     protected function renderOne(array $row, bool $has_front_side, bool $has_back_side): void
     {
-        if ($has_front_side)
+        if ($has_front_side) {
             $this->pdfGenerator->insert(
-                $this->front_content_generator ? $this->front_content_generator->getContent($row) : '',
+                $this->front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $this->front_content_generator->getContent($row) : '',
                 $this->front_template
             );
+        }
 
-        if ($has_back_side)
+        if ($has_back_side) {
             $this->pdfGenerator->insert(
-                $this->back_content_generator ? $this->back_content_generator->getContent($row) : '',
+                $this->back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $this->back_content_generator->getContent($row) : '',
                 $this->back_template
             );
+        }
     }
 
     public function getFrontContentGenerator(): ?ContentGeneratorInterface

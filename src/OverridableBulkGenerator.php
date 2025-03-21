@@ -43,8 +43,8 @@ class OverridableBulkGenerator extends BulkGenerator
         if ($has_front_side) {
             $front_content_generator = $this->getFrontContentGenerator($template) ?? $this->getFrontContentGenerator();
 
-            $this->pdf_generator->insert(
-                $front_content_generator ? $front_content_generator->getContent($row) : '',
+            $this->pdfGenerator->insert(
+                $front_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $front_content_generator->getContent($row) : '',
                 $this->getFrontTemplate($template) ?? $this->getFrontTemplate()
             );
         }
@@ -52,8 +52,8 @@ class OverridableBulkGenerator extends BulkGenerator
         if ($has_back_side) {
             $back_content_generator = $this->getBackContentGenerator($template) ?? $this->getBackContentGenerator();
 
-            $this->pdf_generator->insert(
-                $back_content_generator ? $back_content_generator->getContent($row) : '',
+            $this->pdfGenerator->insert(
+                $back_content_generator instanceof \Kduma\BulkGenerator\ContentGenerators\ContentGeneratorInterface ? $back_content_generator->getContent($row) : '',
                 $this->getBackTemplate($template) ?? $this->getBackTemplate()
             );
         }
@@ -64,8 +64,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     protected function getTemplateName(array $row)
     {
-        if(is_string($this->template_resolver))
+        if (is_string($this->template_resolver)) {
             return $row[$this->template_resolver];
+        }
 
         $callback = $this->template_resolver;
 
@@ -77,8 +78,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function getFrontContentGenerator(string $template = null): ?ContentGeneratorInterface
     {
-        if($template === null)
+        if ($template === null) {
             return parent::getFrontContentGenerator();
+        }
 
         return $this->front_content_generator_overrides[$template] ?? null;
     }
@@ -88,8 +90,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function getFrontTemplate(string $template = null): ?string
     {
-        if($template === null)
+        if ($template === null) {
             return parent::getFrontTemplate();
+        }
 
         return $this->front_template_overrides[$template] ?? null;
     }
@@ -99,8 +102,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function getBackContentGenerator(string $template = null): ?ContentGeneratorInterface
     {
-        if($template === null)
+        if ($template === null) {
             return parent::getBackContentGenerator();
+        }
 
         return $this->back_content_generator_overrides[$template] ?? null;
     }
@@ -110,8 +114,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function getBackTemplate(string $template = null): ?string
     {
-        if($template === null)
+        if ($template === null) {
             return parent::getBackTemplate();
+        }
 
         return $this->back_template_overrides[$template] ?? null;
     }
@@ -122,8 +127,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function setFrontContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
-        if($template === null)
+        if ($template === null) {
             return parent::setFrontContentGenerator($contentGenerator);
+        }
 
         $this->front_content_generator_overrides[$template] = $contentGenerator;
         return $this;
@@ -135,8 +141,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function setFrontTemplate(?string $front_template, string $template = null): OverridableBulkGenerator
     {
-        if($template === null)
+        if ($template === null) {
             return parent::setFrontTemplate($front_template);
+        }
 
         $this->front_template_overrides[$template] = $front_template;
         return $this;
@@ -148,8 +155,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function setBackContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
-        if($template === null)
+        if ($template === null) {
             return parent::setBackContentGenerator($contentGenerator);
+        }
 
         $this->back_content_generator_overrides[$template] = $contentGenerator;
         return $this;
@@ -161,8 +169,9 @@ class OverridableBulkGenerator extends BulkGenerator
      */
     public function setBackTemplate(?string $back_template, string $template = null): OverridableBulkGenerator
     {
-        if($template === null)
+        if ($template === null) {
             return parent::setBackTemplate($back_template);
+        }
 
         $this->back_template_overrides[$template] = $back_template;
         return $this;
