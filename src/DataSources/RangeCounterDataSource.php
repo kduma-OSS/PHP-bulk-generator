@@ -24,7 +24,7 @@ class RangeCounterDataSource implements DataSourceInterface
     public function getData(): array
     {
         return array_map(
-            fn($counter) => ['counter' => $counter],
+            fn($counter): array => ['counter' => $counter],
             range($this->from, $this->to, $this->increment)
         );
     }

@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 
 final class PhpTemplateContentGeneratorTest extends TestCase
 {
-    public function testGetContent()
+    public function testGetContent(): void
     {
         $phpTemplateContentGenerator = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_basic_template.php');
 
         $this->assertSame('Hello John!', $phpTemplateContentGenerator->getContent(['name' => 'John']));
     }
     
-    public function testGetContentWithArray()
+    public function testGetContentWithArray(): void
     {
         $phpTemplateContentGenerator = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_array_template.php');
 

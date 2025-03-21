@@ -57,10 +57,10 @@ class HtmlAttributesHelper implements \Stringable
             if($key != 'style')
                 return [$key => implode(' ', $value)];
             
-            return [$key => implode('; ', array_map(fn($value, $key) => $key.': '.$value, array_values($value), array_keys($value)))];
+            return [$key => implode('; ', array_map(fn($value, $key): string => $key.': '.$value, array_values($value), array_keys($value)))];
         }, array_values($values), array_keys($values)));
         
-        $values = array_map(fn($value, $key) => $key.'="'.htmlentities((string) $value).'"', array_values($values), array_keys($values));
+        $values = array_map(fn($value, $key): string => $key.'="'.htmlentities((string) $value).'"', array_values($values), array_keys($values));
         
         return implode(' ', $values);
     }

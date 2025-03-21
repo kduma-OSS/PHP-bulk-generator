@@ -16,15 +16,15 @@ return RectorConfig::configure()
     ->withPhpSets(php82: true)
     ->withPreparedSets(
         codingStyle: true,
+        typeDeclarations: true,
         privatization: true,
         naming: true,
         instanceOf: true,
-        earlyReturn: true,
 //        strictBooleans: true,
+        earlyReturn: true,
         carbon: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
     )
-    ->withTypeCoverageLevel(0)
     ->withDeadCodeLevel(0)
     ->withCodeQualityLevel(0);

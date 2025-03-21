@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CsvDataSourceTest extends TestCase
 {
-    public function testReadingBasicCsvFile()
+    public function testReadingBasicCsvFile(): void
     {
         $csvDataSource = new CsvDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 

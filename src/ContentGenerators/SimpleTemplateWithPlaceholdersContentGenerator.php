@@ -41,7 +41,7 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
         $variables['variables'] = print_r($variables, true);
 
         return str_replace(
-            array_map(fn($key) => sprintf('{%s}', $key), array_keys($variables)),
+            array_map(fn($key): string => sprintf('{%s}', $key), array_keys($variables)),
             array_values($variables), 
             $this->template
         );

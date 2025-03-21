@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 final class HtmlAttributesHelperTest extends TestCase
 {
 
-    public function test()
+    public function test(): void
     {
         $htmlAttributesHelper = HtmlAttributesHelper::start(['style' => ['position' => 'absolute', 'left' => '5mm']])
             ->add(["class" => "key"]);

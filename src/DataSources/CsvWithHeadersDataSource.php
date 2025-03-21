@@ -21,6 +21,6 @@ class CsvWithHeadersDataSource extends CsvDataSource
         $headers = $ds[0];
         unset($ds[0]);
         
-        return array_map(fn($row) => array_merge([], ...array_map(fn($key, $index) => [$key => $row[$index] ?? null], array_values($headers), array_keys($headers))), array_values($ds));
+        return array_map(fn($row): array => array_merge([], ...array_map(fn($key, $index) => [$key => $row[$index] ?? null], array_values($headers), array_keys($headers))), array_values($ds));
     }
 }

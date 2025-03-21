@@ -11,7 +11,7 @@ use Tightenco\Collect\Support\Collection;
 final class PassthroughDataSourceTest extends TestCase
 {
 
-    public function testGetData()
+    public function testGetData(): void
     {
         $data = [1, 2, 3];
         

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class RangeCounterDataSourceTest extends TestCase
 {
-    public function testGetDataForRisingRange()
+    public function testGetDataForRisingRange(): void
     {
         $rangeCounterDataSource = new RangeCounterDataSource(1, 4);
 
@@ -31,7 +31,7 @@ final class RangeCounterDataSourceTest extends TestCase
         ], $data);
     }
 
-    public function testGetDataForFallingRange()
+    public function testGetDataForFallingRange(): void
     {
         $rangeCounterDataSource = new RangeCounterDataSource(4, 1);
 
@@ -53,7 +53,7 @@ final class RangeCounterDataSourceTest extends TestCase
         ], $data);
     }
 
-    public function testGetDataForRisingRangeWithSpecifiedIncrements()
+    public function testGetDataForRisingRangeWithSpecifiedIncrements(): void
     {
         $rangeCounterDataSource = new RangeCounterDataSource(1, 4, 2);
 
@@ -69,7 +69,7 @@ final class RangeCounterDataSourceTest extends TestCase
         ], $data);
     }
 
-    public function testGetDataForFallingRangeWithSpecifiedIncrements()
+    public function testGetDataForFallingRangeWithSpecifiedIncrements(): void
     {
         $rangeCounterDataSource = new RangeCounterDataSource(4, 1, 2);
 

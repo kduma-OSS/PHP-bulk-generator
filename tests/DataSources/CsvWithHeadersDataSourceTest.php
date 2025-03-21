@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CsvWithHeadersDataSourceTest extends TestCase
 {
-    public function testGettingHeaders()
+    public function testGettingHeaders(): void
     {
         $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
@@ -21,7 +21,7 @@ final class CsvWithHeadersDataSourceTest extends TestCase
         );
     }
 
-    public function testReadingBasicCsvFileWithHeaders()
+    public function testReadingBasicCsvFileWithHeaders(): void
     {
         $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
@@ -44,7 +44,7 @@ final class CsvWithHeadersDataSourceTest extends TestCase
         );
     }
 
-    public function testReadingMissingColumnsCsvFileWithHeaders()
+    public function testReadingMissingColumnsCsvFileWithHeaders(): void
     {
         $csvWithHeadersDataSource = new CsvWithHeadersDataSource(__DIR__ . '/../stubs/missing_columns_csv.csv');
 

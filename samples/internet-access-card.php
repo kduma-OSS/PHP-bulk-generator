@@ -10,13 +10,13 @@ use Kduma\BulkGenerator\BulkGenerator;
 
 require __DIR__.'/../vendor/autoload.php';
 
-function str_rand(int $length = 64){ // 64 = 32
+function str_rand(int $length = 64): string{ // 64 = 32
     $length = ($length < 4) ? 4 : $length;
     return strtoupper(bin2hex(random_bytes(($length-($length%2))/2)));
 }
 
 $dataSource = new PassthroughDataSource(
-    array_map(fn($row) => [
+    array_map(fn($row): array => [
         'number' => $row,
         'barcode' => random_int(100000, 999999),
         'username' => str_rand(8),

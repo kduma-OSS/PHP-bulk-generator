@@ -29,7 +29,7 @@ class BulkGenerator
     }
 
 
-    public function generate(string $filename)
+    public function generate(string $filename): void
     {
         $data = $this->dataSource->getData();
 
