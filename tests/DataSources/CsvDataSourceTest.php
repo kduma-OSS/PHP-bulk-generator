@@ -13,7 +13,7 @@ class CsvDataSourceTest extends TestCase
 
         $data = $sut->getData();
         
-        $this->assertEquals(
+        $this->assertSame(
             [
                 [
                     'column_0' => 'id',

@@ -13,7 +13,7 @@ class RangeCounterDataSourceTest extends TestCase
         
         $data = $sut->getData();
         
-        $this->assertEquals([
+        $this->assertSame([
             [
                 'counter' => 1
             ], 
@@ -35,7 +35,7 @@ class RangeCounterDataSourceTest extends TestCase
         
         $data = $sut->getData();
         
-        $this->assertEquals([
+        $this->assertSame([
             [
                 'counter' => 4
             ], 
@@ -56,7 +56,7 @@ class RangeCounterDataSourceTest extends TestCase
         
         $data = $sut->getData();
         
-        $this->assertEquals([
+        $this->assertSame([
             [
                 'counter' => 1
             ], 
@@ -72,7 +72,7 @@ class RangeCounterDataSourceTest extends TestCase
         
         $data = $sut->getData();
         
-        $this->assertEquals([
+        $this->assertSame([
             [
                 'counter' => 4
             ], 

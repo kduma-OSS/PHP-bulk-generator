@@ -11,14 +11,14 @@ class SimpleTemplateWithPlaceholdersContentGeneratorTest extends TestCase
     {
         $sut = new SimpleTemplateWithPlaceholdersContentGenerator('Hello {name}!');
         
-        $this->assertEquals('Hello John!', $sut->getContent(['name' => 'John']));
+        $this->assertSame('Hello John!', $sut->getContent(['name' => 'John']));
     }
     
     public function testGetContentWithArray()
     {
         $sut = new SimpleTemplateWithPlaceholdersContentGenerator('Hello {user.name}!');
         
-        $this->assertEquals('Hello John!', $sut->getContent([
+        $this->assertSame('Hello John!', $sut->getContent([
             'user' => [
                 'name' => 'John'
             ]

@@ -15,6 +15,6 @@ class PassthroughDataSourceTest extends TestCase
         
         $sut = new PassthroughDataSource($data);
 
-        $this->assertEquals($data, $sut->getData());
+        $this->assertSame($data, $sut->getData());
     }
 }

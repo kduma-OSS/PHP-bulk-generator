@@ -11,14 +11,14 @@ class PhpTemplateContentGeneratorTest extends TestCase
     {
         $sut = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_basic_template.php');
 
-        $this->assertEquals('Hello John!', $sut->getContent(['name' => 'John']));
+        $this->assertSame('Hello John!', $sut->getContent(['name' => 'John']));
     }
     
     public function testGetContentWithArray()
     {
         $sut = new PhpTemplateContentGenerator(__DIR__.'/../stubs/php_array_template.php');
 
-        $this->assertEquals('Hello John!', $sut->getContent([
+        $this->assertSame('Hello John!', $sut->getContent([
             'user' => [
                 'name' => 'John'
             ]

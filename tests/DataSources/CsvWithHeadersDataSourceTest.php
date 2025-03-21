@@ -13,7 +13,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
 
         $data = $sut->getHeaders();
 
-        $this->assertEquals(
+        $this->assertSame(
             ['id','name','city'],
             $data
         );
@@ -24,7 +24,7 @@ class CsvWithHeadersDataSourceTest extends TestCase
 
         $data = $sut->getData();
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 [
                     'id' => '1',

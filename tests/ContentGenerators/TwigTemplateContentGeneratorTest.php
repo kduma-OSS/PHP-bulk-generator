@@ -11,14 +11,14 @@ class TwigTemplateContentGeneratorTest extends TestCase
     {
         $sut = new TwigTemplateContentGenerator('Hello {{name}}!');
         
-        $this->assertEquals('Hello John!', $sut->getContent(['name' => 'John']));
+        $this->assertSame('Hello John!', $sut->getContent(['name' => 'John']));
     }
     
     public function testGetContentWithArray()
     {
         $sut = new TwigTemplateContentGenerator('Hello {{user.name}}!');
         
-        $this->assertEquals('Hello John!', $sut->getContent([
+        $this->assertSame('Hello John!', $sut->getContent([
             'user' => [
                 'name' => 'John'
             ]
