@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator\PageOptions;
 
-
 use Mpdf\PageFormat;
 
 class PageSize
 {
+    public function __construct(
+        private readonly float $width,
+        private readonly float $height,
+        private readonly bool $landscape = false
+    ) {
+    }
+
     public function getWidth(): float
     {
         return $this->width;
@@ -24,17 +30,10 @@ class PageSize
         return $this->landscape;
     }
 
-    /**
-     * PageSize constructor.
-     */
-    public function __construct(private readonly float $width, private readonly float $height, private readonly bool $landscape = false)
-    {
-    }
-
-    public static function fromName(string $format, bool $landscape = false): PageSize
+    public static function fromName(string $format, bool $landscape = false): self
     {
         $size = PageFormat::getSizeFromName($format);
-        
-        return new PageSize($size[0], $size[1], $landscape);
+
+        return new self($size[0], $size[1], $landscape);
     }
 }

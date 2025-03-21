@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+use Kduma\BulkGenerator\BulkGenerator;
 use Kduma\BulkGenerator\ContentGenerators\TwigTemplateContentGenerator;
 use Kduma\BulkGenerator\DataSources\PassthroughDataSource;
-use Kduma\BulkGenerator\PdfGenerators\MpdfGenerator;
 use Kduma\BulkGenerator\PageOptions\PageSize;
-use Kduma\BulkGenerator\BulkGenerator;
+use Kduma\BulkGenerator\PdfGenerators\MpdfGenerator;
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $data = <<<SAMPLE_DATA
 1|79C4BA2F-A922-F7A4-24BD-56974973AC5B|Kathleen Parks|High Level
@@ -112,9 +114,8 @@ $data = <<<SAMPLE_DATA
 SAMPLE_DATA;
 
 $data = explode("\n", $data);
-$data = array_map(fn($row) => explode("|", $row), $data);
-$data = array_map(fn($row) => array_combine(['number', 'uuid', 'name', 'city'], $row), $data);
-
+$data = array_map(fn ($row) => explode('|', $row), $data);
+$data = array_map(fn ($row) => array_combine(['number', 'uuid', 'name', 'city'], $row), $data);
 
 $dataSource = new PassthroughDataSource($data);
 
@@ -171,7 +172,7 @@ $content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
 $generator = (new BulkGenerator($dataSource, $pdfGenerator))
     ->setFrontContentGenerator($content);
 
-$generator->generate(__DIR__.'/output.pdf');
+$generator->generate(__DIR__ . '/output.pdf');
 
 $back_content = new TwigTemplateContentGenerator(/** @lang Twig */ <<<Twig
     {% box 90-10-2.5, 2.5, 10 with {"class": ["number"]} %}

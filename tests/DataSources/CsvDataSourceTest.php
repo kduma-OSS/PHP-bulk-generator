@@ -14,7 +14,7 @@ final class CsvDataSourceTest extends TestCase
         $csvDataSource = new CsvDataSource(__DIR__ . '/../stubs/basic_csv.csv');
 
         $data = $csvDataSource->getData();
-        
+
         $this->assertSame(
             [
                 [
@@ -32,7 +32,7 @@ final class CsvDataSourceTest extends TestCase
                     'column_1' => 'Michael',
                     'column_2' => 'New York',
                 ],
-            ], 
+            ],
             $data
         );
     }

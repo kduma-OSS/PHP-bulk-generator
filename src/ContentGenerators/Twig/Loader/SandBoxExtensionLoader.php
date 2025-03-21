@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator\ContentGenerators\Twig\Loader;
 
-
 use Twig\Environment;
 use Twig\Extension\SandboxExtension;
 use Twig\Sandbox\SecurityPolicy;
 
 class SandBoxExtensionLoader implements LoaderInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function load(Environment $twigEnvironment): Environment
     {
         $tags = ['if'];

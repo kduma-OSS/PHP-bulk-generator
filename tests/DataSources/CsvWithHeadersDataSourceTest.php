@@ -15,10 +15,7 @@ final class CsvWithHeadersDataSourceTest extends TestCase
 
         $data = $csvWithHeadersDataSource->getHeaders();
 
-        $this->assertSame(
-            ['id','name','city'],
-            $data
-        );
+        $this->assertSame(['id', 'name', 'city'], $data);
     }
 
     public function testReadingBasicCsvFileWithHeaders(): void

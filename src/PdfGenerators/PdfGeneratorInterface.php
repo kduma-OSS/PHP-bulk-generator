@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator\PdfGenerators;
 
-
 interface PdfGeneratorInterface
 {
     public function start(bool $doubleSided): void;

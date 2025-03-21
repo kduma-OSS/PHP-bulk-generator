@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Kduma\BulkGenerator\ContentGenerators;
 
-
-use Twig\Environment;
-use Twig\Loader\ArrayLoader;
 use Kduma\BulkGenerator\ContentGenerators\Twig\BoxTokenParser;
 use Kduma\BulkGenerator\ContentGenerators\Twig\Loader\LoaderInterface;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 class TwigTemplateContentGenerator implements ContentGeneratorInterface
 {
@@ -17,11 +16,10 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
      */
     private array $loaders = [];
 
-    /**
-     * TwigTemplateContentGenerator constructor.
-     */
-    public function __construct(private readonly string $template, private readonly array $partials = [])
-    {
+    public function __construct(
+        private readonly string $template,
+        private readonly array $partials = []
+    ) {
     }
 
     public function getContent(array $variables): string
@@ -29,25 +27,6 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
         $twigEnvironment = $this->buildTwigEnvironment();
 
         return $twigEnvironment->render('index', $variables);
-    }
-
-    protected function buildTwigEnvironment(): Environment
-    {
-        $arrayLoader = new ArrayLoader([
-                'index' => $this->template,
-            ] + $this->partials);
-
-        $twig = new Environment($arrayLoader, [
-//            'cache' => __DIR__.'/../../cache/'
-        ]);
-        
-        $twig->addTokenParser(new BoxTokenParser());
-
-        foreach ($this->loaders as $loader) {
-            $twig = $loader->load($twig);
-        }
-        
-        return $twig;
     }
 
     /**
@@ -61,15 +40,34 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
     /**
      * @param LoaderInterface[] $loaders
      */
-    public function setLoaders(LoaderInterface ...$loaders): TwigTemplateContentGenerator
+    public function setLoaders(LoaderInterface ...$loaders): self
     {
         $this->loaders = $loaders;
         return $this;
     }
 
-    public function addLoader(LoaderInterface $loader): TwigTemplateContentGenerator
+    public function addLoader(LoaderInterface $loader): self
     {
         $this->loaders[] = $loader;
         return $this;
+    }
+
+    protected function buildTwigEnvironment(): Environment
+    {
+        $arrayLoader = new ArrayLoader([
+            'index' => $this->template,
+        ] + $this->partials);
+
+        $twig = new Environment($arrayLoader, [
+            //            'cache' => __DIR__.'/../../cache/'
+        ]);
+
+        $twig->addTokenParser(new BoxTokenParser());
+
+        foreach ($this->loaders as $loader) {
+            $twig = $loader->load($twig);
+        }
+
+        return $twig;
     }
 }

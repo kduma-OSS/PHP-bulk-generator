@@ -17,17 +17,17 @@ final class RangeCounterDataSourceTest extends TestCase
 
         $this->assertSame([
             [
-                'counter' => 1
-            ], 
+                'counter' => 1,
+            ],
             [
-                'counter' => 2
-            ], 
+                'counter' => 2,
+            ],
             [
-                'counter' => 3
-            ], 
+                'counter' => 3,
+            ],
             [
-                'counter' => 4
-            ]
+                'counter' => 4,
+            ],
         ], $data);
     }
 
@@ -39,17 +39,17 @@ final class RangeCounterDataSourceTest extends TestCase
 
         $this->assertSame([
             [
-                'counter' => 4
-            ], 
+                'counter' => 4,
+            ],
             [
-                'counter' => 3
-            ], 
+                'counter' => 3,
+            ],
             [
-                'counter' => 2
-            ], 
+                'counter' => 2,
+            ],
             [
-                'counter' => 1
-            ]
+                'counter' => 1,
+            ],
         ], $data);
     }
 
@@ -61,11 +61,11 @@ final class RangeCounterDataSourceTest extends TestCase
 
         $this->assertSame([
             [
-                'counter' => 1
-            ], 
+                'counter' => 1,
+            ],
             [
-                'counter' => 3
-            ]
+                'counter' => 3,
+            ],
         ], $data);
     }
 
@@ -77,11 +77,11 @@ final class RangeCounterDataSourceTest extends TestCase
 
         $this->assertSame([
             [
-                'counter' => 4
-            ], 
+                'counter' => 4,
+            ],
             [
-                'counter' => 2
-            ]
+                'counter' => 2,
+            ],
         ], $data);
     }
 }

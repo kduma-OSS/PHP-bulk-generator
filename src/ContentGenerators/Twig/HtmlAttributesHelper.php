@@ -10,26 +10,11 @@ class HtmlAttributesHelper implements Stringable
 {
     private array $values;
 
-    /**
-     * HtmlAttributesHelper constructor.
-     */
     public function __construct(array ...$values)
     {
         $this->values = $values;
     }
 
-    public static function start(array ...$values): HtmlAttributesHelper
-    {
-        return new HtmlAttributesHelper(...$values);
-    }
-
-    public function add(array ...$values): HtmlAttributesHelper
-    {
-        $this->values = array_merge($this->values, $values);
-        
-        return $this;
-    }
-    
     public function __toString(): string
     {
         $values = [];
@@ -38,7 +23,7 @@ class HtmlAttributesHelper implements Stringable
             foreach ($arr as $key => $value) {
                 if (is_array($value)) {
                     foreach ($value as $p => $v) {
-                        if ($key == 'style') {
+                        if ($key === 'style') {
                             $values[$key][$p] = $v;
                         } else {
                             $values[$key][] = $v;
@@ -49,21 +34,48 @@ class HtmlAttributesHelper implements Stringable
                 }
             }
         }
-        
+
         $values = array_merge([], ...array_map(function ($value, $key) {
-            if (!is_array($value)) {
-                return [$key => $value];
+            if (! is_array($value)) {
+                return [
+                    $key => $value,
+                ];
             }
 
-            if ($key != 'style') {
-                return [$key => implode(' ', $value)];
+            if ($key !== 'style') {
+                return [
+                    $key => implode(' ', $value),
+                ];
             }
-            
-            return [$key => implode('; ', array_map(fn($value, $key): string => $key.': '.$value, array_values($value), array_keys($value)))];
+
+            return [
+                $key => implode(
+                    '; ',
+                    array_map(fn ($value, $key): string => $key . ': ' . $value, array_values($value), array_keys(
+                        $value
+                    ))
+                ),
+            ];
         }, array_values($values), array_keys($values)));
-        
-        $values = array_map(fn($value, $key): string => $key.'="'.htmlentities($value).'"', array_values($values), array_keys($values));
-        
+
+        $values = array_map(
+            fn ($value, $key): string => $key . '="' . htmlentities($value) . '"',
+            array_values($values),
+            array_keys($values)
+        );
+
         return implode(' ', $values);
+    }
+
+    public static function start(array ...$values): self
+    {
+        return new self(...$values);
+    }
+
+    public function add(array ...$values): self
+    {
+        $this->values = array_merge($this->values, $values);
+
+        return $this;
     }
 }
