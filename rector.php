@@ -27,4 +27,7 @@ return RectorConfig::configure()
         carbon: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
+    )
+    ->withComposerBased(
+        phpunit: true
     );
