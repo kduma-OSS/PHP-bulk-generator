@@ -20,9 +20,6 @@ class BulkGenerator
 
     /**
      * BulkGenerator constructor.
-     *
-     * @param DataSourceInterface $dataSource
-     * @param PdfGeneratorInterface $pdfGenerator
      */
     public function __construct(protected DataSourceInterface $dataSource, protected PdfGeneratorInterface $pdfGenerator)
     {
@@ -50,11 +47,6 @@ class BulkGenerator
         file_put_contents($filename, $this->pdfGenerator->finish());
     }
 
-    /**
-     * @param array $row
-     * @param bool  $has_front_side
-     * @param bool  $has_back_side
-     */
     protected function renderOne(array $row, bool $has_front_side, bool $has_back_side): void
     {
         if ($has_front_side)
@@ -70,114 +62,66 @@ class BulkGenerator
             );
     }
 
-    /**
-     * @return ContentGeneratorInterface|null
-     */
     public function getFrontContentGenerator(): ?ContentGeneratorInterface
     {
         return $this->front_content_generator;
     }
 
-    /**
-     * @param ContentGeneratorInterface|null $contentGenerator
-     *
-     * @return BulkGenerator
-     */
     public function setFrontContentGenerator(?ContentGeneratorInterface $contentGenerator): BulkGenerator
     {
         $this->front_content_generator = $contentGenerator;
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFrontTemplate(): ?string
     {
         return $this->front_template;
     }
 
-    /**
-     * @param string|null $front_template
-     *
-     * @return BulkGenerator
-     */
     public function setFrontTemplate(?string $front_template): BulkGenerator
     {
         $this->front_template = $front_template;
         return $this;
     }
 
-    /**
-     * @return ContentGeneratorInterface|null
-     */
     public function getBackContentGenerator(): ?ContentGeneratorInterface
     {
         return $this->back_content_generator;
     }
 
-    /**
-     * @param ContentGeneratorInterface|null $contentGenerator
-     *
-     * @return BulkGenerator
-     */
     public function setBackContentGenerator(?ContentGeneratorInterface $contentGenerator): BulkGenerator
     {
         $this->back_content_generator = $contentGenerator;
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBackTemplate(): ?string
     {
         return $this->back_template;
     }
 
-    /**
-     * @param string|null $back_template
-     *
-     * @return BulkGenerator
-     */
     public function setBackTemplate(?string $back_template): BulkGenerator
     {
         $this->back_template = $back_template;
         return $this;
     }
 
-    /**
-     * @return DataSourceInterface
-     */
     public function getDataSource(): DataSourceInterface
     {
         return $this->dataSource;
     }
 
-    /**
-     * @param DataSourceInterface $dataSource
-     *
-     * @return BulkGenerator
-     */
     public function setDataSource(DataSourceInterface $dataSource): BulkGenerator
     {
         $this->dataSource = $dataSource;
         return $this;
     }
 
-    /**
-     * @return PdfGeneratorInterface
-     */
     public function getPdfGenerator(): PdfGeneratorInterface
     {
         return $this->pdfGenerator;
     }
 
-    /**
-     * @param PdfGeneratorInterface $pdfGenerator
-     *
-     * @return BulkGenerator
-     */
     public function setPdfGenerator(PdfGeneratorInterface $pdfGenerator): BulkGenerator
     {
         $this->pdfGenerator = $pdfGenerator;

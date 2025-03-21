@@ -11,8 +11,6 @@ class PassthroughDataSource implements DataSourceInterface
 {
     /**
      * PassthroughDataSource constructor.
-     *
-     * @param array $data
      */
     public function __construct(private readonly array $data)
     {

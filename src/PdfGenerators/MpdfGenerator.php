@@ -25,7 +25,6 @@ class MpdfGenerator implements PdfGeneratorInterface
     /**
      * MpdfGenerator constructor.
      *
-     * @param PageSize|null $pageSize
      * @param PageMargins|null $pageMargins
      */
     public function __construct(?PageSize $pageSize = null, private readonly PageMargins $pageMargins = new PageMargins(0, 0, 0, 0, 0, 0))

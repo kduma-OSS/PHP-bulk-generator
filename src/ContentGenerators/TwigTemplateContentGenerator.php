@@ -24,9 +24,6 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
 
     /**
      * TwigTemplateContentGenerator constructor.
-     *
-     * @param string $template
-     * @param array  $partials
      */
     public function __construct(private readonly string $template, private readonly array $partials = [])
     {
@@ -39,9 +36,6 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
         return $twigEnvironment->render('index', $variables);
     }
 
-    /**
-     * @return \Twig\Environment
-     */
     protected function buildTwigEnvironment(): \Twig\Environment
     {
         $arrayLoader = new \Twig\Loader\ArrayLoader([
@@ -71,8 +65,6 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
 
     /**
      * @param LoaderInterface[] $loaders
-     *
-     * @return TwigTemplateContentGenerator
      */
     public function setLoaders(LoaderInterface ...$loaders): TwigTemplateContentGenerator
     {
@@ -80,11 +72,6 @@ class TwigTemplateContentGenerator implements ContentGeneratorInterface
         return $this;
     }
 
-    /**
-     * @param LoaderInterface $loader
-     *
-     * @return TwigTemplateContentGenerator
-     */
     public function addLoader(LoaderInterface $loader): TwigTemplateContentGenerator
     {
         $this->loaders[] = $loader;

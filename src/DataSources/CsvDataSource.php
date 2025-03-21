@@ -12,11 +12,6 @@ class CsvDataSource implements DataSourceInterface
 {
     /**
      * CsvDataSource constructor.
-     *
-     * @param string $filename
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escape
      */
     public function __construct(private readonly string $filename, private readonly string $delimiter = ',', private readonly string $enclosure = '"', private readonly string $escape = '\\')
     {

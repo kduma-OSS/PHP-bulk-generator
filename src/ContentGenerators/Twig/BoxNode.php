@@ -53,9 +53,6 @@ class BoxNode extends Node
         }
     }
 
-    /**
-     * @param Compiler $compiler
-     */
     protected function compileDiv(Compiler $compiler): void
     {
         $compiler
@@ -116,9 +113,6 @@ class BoxNode extends Node
             ->raw(";\n");
     }
 
-    /**
-     * @param Compiler $compiler
-     */
     protected function compileTable(Compiler $compiler): void
     {
         $compiler

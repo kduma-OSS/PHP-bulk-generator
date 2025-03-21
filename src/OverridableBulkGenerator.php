@@ -11,24 +11,12 @@ use Kduma\BulkGenerator\PdfGenerators\PdfGeneratorInterface;
 
 class OverridableBulkGenerator extends BulkGenerator
 {
-    /**
-     * @var array
-     */
     protected array $front_template_overrides = [];
 
-    /**
-     * @var array
-     */
     protected array $front_content_generator_overrides = [];
 
-    /**
-     * @var array
-     */
     protected array $back_content_generator_overrides = [];
 
-    /**
-     * @var array
-     */
     protected array $back_template_overrides = [];
 
     /**
@@ -39,8 +27,6 @@ class OverridableBulkGenerator extends BulkGenerator
     /**
      * OverridableBulkGenerator constructor.
      *
-     * @param DataSourceInterface $dataSource
-     * @param PdfGeneratorInterface $pdfGenerator
      * @param string|callable       $template_resolver
      */
     public function __construct(DataSourceInterface $dataSource, PdfGeneratorInterface $pdfGenerator, $template_resolver)
@@ -50,11 +36,6 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
 
-    /**
-     * @param array $row
-     * @param bool  $has_front_side
-     * @param bool  $has_back_side
-     */
     protected function renderOne(array $row, bool $has_front_side, bool $has_back_side): void
     {
         $template = $this->getTemplateName($row);
@@ -79,8 +60,6 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param array $row
-     *
      * @return string
      */
     protected function getTemplateName(array $row)
@@ -95,8 +74,6 @@ class OverridableBulkGenerator extends BulkGenerator
 
     /**
      * @param string|null $template
-     *
-     * @return ContentGeneratorInterface|null
      */
     public function getFrontContentGenerator(string $template = null): ?ContentGeneratorInterface
     {
@@ -108,8 +85,6 @@ class OverridableBulkGenerator extends BulkGenerator
 
     /**
      * @param string|null $template
-     *
-     * @return string|null
      */
     public function getFrontTemplate(string $template = null): ?string
     {
@@ -121,8 +96,6 @@ class OverridableBulkGenerator extends BulkGenerator
 
     /**
      * @param string|null $template
-     *
-     * @return ContentGeneratorInterface|null
      */
     public function getBackContentGenerator(string $template = null): ?ContentGeneratorInterface
     {
@@ -134,8 +107,6 @@ class OverridableBulkGenerator extends BulkGenerator
 
     /**
      * @param string|null $template
-     *
-     * @return string|null
      */
     public function getBackTemplate(string $template = null): ?string
     {
@@ -146,10 +117,8 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param ContentGeneratorInterface|null $contentGenerator
      * @param string|null                    $template
      *
-     * @return $this
      */
     public function setFrontContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
@@ -161,10 +130,8 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param string|null $front_template
      * @param string|null $template
      *
-     * @return $this
      */
     public function setFrontTemplate(?string $front_template, string $template = null): OverridableBulkGenerator
     {
@@ -176,10 +143,8 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param ContentGeneratorInterface|null $contentGenerator
      * @param string|null                    $template
      *
-     * @return $this
      */
     public function setBackContentGenerator(?ContentGeneratorInterface $contentGenerator, string $template = null): OverridableBulkGenerator
     {
@@ -191,10 +156,8 @@ class OverridableBulkGenerator extends BulkGenerator
     }
 
     /**
-     * @param string|null $back_template
      * @param string|null $template
      *
-     * @return $this
      */
     public function setBackTemplate(?string $back_template, string $template = null): OverridableBulkGenerator
     {
@@ -205,76 +168,44 @@ class OverridableBulkGenerator extends BulkGenerator
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getFrontTemplateOverrides(): array
     {
         return $this->front_template_overrides;
     }
 
-    /**
-     * @return array
-     */
     public function getFrontContentGeneratorOverrides(): array
     {
         return $this->front_content_generator_overrides;
     }
 
-    /**
-     * @return array
-     */
     public function getBackContentGeneratorOverrides(): array
     {
         return $this->back_content_generator_overrides;
     }
 
-    /**
-     * @return array
-     */
     public function getBackTemplateOverrides(): array
     {
         return $this->back_template_overrides;
     }
 
-    /**
-     * @param array $front_template_overrides
-     *
-     * @return OverridableBulkGenerator
-     */
     public function setFrontTemplateOverrides(array $front_template_overrides): OverridableBulkGenerator
     {
         $this->front_template_overrides = $front_template_overrides;
         return $this;
     }
 
-    /**
-     * @param array $front_content_generator_overrides
-     *
-     * @return OverridableBulkGenerator
-     */
     public function setFrontContentGeneratorOverrides(array $front_content_generator_overrides): OverridableBulkGenerator
     {
         $this->front_content_generator_overrides = $front_content_generator_overrides;
         return $this;
     }
 
-    /**
-     * @param array $back_content_generator_overrides
-     *
-     * @return OverridableBulkGenerator
-     */
     public function setBackContentGeneratorOverrides(array $back_content_generator_overrides): OverridableBulkGenerator
     {
         $this->back_content_generator_overrides = $back_content_generator_overrides;
         return $this;
     }
 
-    /**
-     * @param array $back_template_overrides
-     *
-     * @return OverridableBulkGenerator
-     */
     public function setBackTemplateOverrides(array $back_template_overrides): OverridableBulkGenerator
     {
         $this->back_template_overrides = $back_template_overrides;
@@ -291,8 +222,6 @@ class OverridableBulkGenerator extends BulkGenerator
 
     /**
      * @param string|callable $template_resolver
-     *
-     * @return OverridableBulkGenerator
      */
     public function setTemplateResolver($template_resolver): OverridableBulkGenerator
     {

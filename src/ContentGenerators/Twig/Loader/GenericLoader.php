@@ -17,8 +17,6 @@ class GenericLoader implements LoaderInterface
 
     /**
      * GenericLoader constructor.
-     *
-     * @param callable $callback
      */
     public function __construct(callable $callback)
     {

@@ -12,8 +12,6 @@ class PhpTemplateContentGenerator implements ContentGeneratorInterface
 {
     /**
      * PhpTemplateContentGenerator constructor.
-     *
-     * @param string $template
      */
     public function __construct(private readonly string $template)
     {

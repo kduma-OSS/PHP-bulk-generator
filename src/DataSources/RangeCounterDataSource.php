@@ -12,10 +12,6 @@ class RangeCounterDataSource implements DataSourceInterface
 {
     /**
      * RangeCounterDataSource constructor.
-     *
-     * @param int $from
-     * @param int $to
-     * @param int $increment
      */
     public function __construct(private readonly int $from, private readonly int $to, private readonly int $increment = 1)
     {

@@ -11,8 +11,6 @@ class HtmlAttributesHelper implements \Stringable
 
     /**
      * HtmlAttributesHelper constructor.
-     *
-     * @param array $values
      */
     public function __construct(array ...$values)
     {
@@ -60,7 +58,7 @@ class HtmlAttributesHelper implements \Stringable
             return [$key => implode('; ', array_map(fn($value, $key): string => $key.': '.$value, array_values($value), array_keys($value)))];
         }, array_values($values), array_keys($values)));
         
-        $values = array_map(fn($value, $key): string => $key.'="'.htmlentities((string) $value).'"', array_values($values), array_keys($values));
+        $values = array_map(fn($value, $key): string => $key.'="'.htmlentities($value).'"', array_values($values), array_keys($values));
         
         return implode(' ', $values);
     }

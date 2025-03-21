@@ -12,8 +12,6 @@ class SimpleTemplateWithPlaceholdersContentGenerator implements ContentGenerator
 {
     /**
      * SimpleTemplateWithPlaceholdersContentGenerator constructor.
-     *
-     * @param string $template
      */
     public function __construct(private readonly string $template)
     {
